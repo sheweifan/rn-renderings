@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Item from '../../components/Item'
-// import Svg, { Defs, LinearGradient, Stop, Ellipse} from 'react-native-art-svg';  
 // import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 
 const Index = props => {
@@ -21,6 +21,11 @@ const Index = props => {
         <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
         <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
       </View>
+      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+        <Text style={styles.buttonText}>
+          Sign in with Facebook
+        </Text>
+      </LinearGradient>
       {
         // <Svg height="150" width="300">
         //   <Defs>
@@ -101,7 +106,21 @@ const styles = StyleSheet.create({
   topLinkText: {
     fontSize: 14,
     color: '#fff'
-  }
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  },
+  buttonText: {
+    fontSize: 18,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
 });
 
 export default Index
