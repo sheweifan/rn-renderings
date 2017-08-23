@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Item from '../../components/Item'
+// import Svg, { Defs, LinearGradient, Stop, Ellipse} from 'react-native-art-svg';  
 // import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 
@@ -19,6 +21,18 @@ const Index = props => {
         <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
         <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
       </View>
+      {
+        // <Svg height="150" width="300">
+        //   <Defs>
+        //     <LinearGradient id="grad" x1="0" y1="0" x2="170" y2="0">
+        //       <Stop offset="0" stopColor="rgb(255,255,0)" stopOpacity="0" />
+        //       <Stop offset="1" stopColor="red" stopOpacity="1" />
+        //     </LinearGradient>
+        //   </Defs>
+        //   <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
+        // </Svg>
+      }
+      <Item />
     </View>
   );
 };
