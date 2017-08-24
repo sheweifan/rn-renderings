@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-nati
 import Icon from 'react-native-vector-icons/Ionicons';
 import Item from '../../components/Item'
 // import LinearGradient from 'react-native-linear-gradient';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 
 const Index = props => {
@@ -21,11 +21,9 @@ const Index = props => {
         <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
         <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
       </View>
-      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
-        <Text style={styles.buttonText}>
-          Sign in with Facebook
-        </Text>
-      </LinearGradient>
+
+      <Item />
+
       {
         // <Svg height="150" width="300">
         //   <Defs>
@@ -36,8 +34,21 @@ const Index = props => {
         //   </Defs>
         //   <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
         // </Svg>
+        // <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+        //   <Text style={styles.buttonText}>
+        //     Sign in with Facebook
+        //   </Text>
+        // </LinearGradient>
+        // <LinearGradient
+        //   start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
+        //   locations={[0,0.5,0.6]}
+        //   colors={['#4c669f', '#3b5998', '#192f6a']}
+        //   style={styles.linearGradient}>
+        //   <Text style={styles.buttonText}>
+        //     Sign in with Facebook
+        //   </Text>
+        // </LinearGradient>
       }
-      <Item />
     </View>
   );
 };
@@ -89,7 +100,7 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   topLink: {
     display: 'flex',
@@ -97,30 +108,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 4,
     height: 55,
-    width: width*0.5-padding*2,
+    width: (width)*0.5-padding*1.5,
     backgroundColor: '#e5e5e5'
   },
   topLink1: {
-
+    backgroundColor: '#0aa5e2'
+  },
+  topLink2: {
+    backgroundColor: '#8351bf'
   },
   topLinkText: {
     fontSize: 14,
     color: '#fff'
   },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
+  // linearGradient: {
+  //   flex: 1,
+  //   paddingLeft: 15,
+  //   paddingRight: 15,
+  //   borderRadius: 5
+  // },
+  // buttonText: {
+  //   fontSize: 18,
+  //   textAlign: 'center',
+  //   margin: 10,
+  //   color: '#ffffff',
+  //   backgroundColor: 'transparent',
+  // },
 });
 
 export default Index
