@@ -14,7 +14,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "reset": "rm -fr $TMPDIR/react-* && npm start -- --reset-cache"
   },
   "jest": {
     "preset": "jest-expo"
@@ -24,7 +25,7 @@
     "expo": "^19.0.0",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.1",
-    "react-native-linear-gradient": "^2.3.0",
+    "react-native-linear-gradient": "^2.2.0",
     "react-native-vector-icons": "^4.3.0"
   }
 }
