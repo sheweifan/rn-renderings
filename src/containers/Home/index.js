@@ -1,57 +1,117 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Item from '../../components/Item'
+import Item from '../../components/Item';
+// import Detail from '../../containers/Detail';
 // import LinearGradient from 'react-native-linear-gradient';
 // import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 
-const Index = props => {
-  return (
-    <View >
-      <View style={styles.banner}>
-        <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
-        </Image>
-        <View style={styles.search}>
-          <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
-          <Text style={styles.searchInput}>搜索</Text>
+class Index extends React.Component {
+  static navigationOptions = {
+    // title: 'Welcome',
+    header: null
+  };
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+        <View >
+          <View style={styles.banner}>
+            <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
+            </Image>
+            <View style={styles.search}>
+              <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
+              <Text style={styles.searchInput}>搜索</Text>
+            </View>
+          </View>
+          <View style={styles.topLinks}>
+            <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
+            <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
+          </View>
+
+          <Item />
+
+
+          <Button 
+            onPress={() => navigate('Detail')}
+            title="DETAIL"
+          ></Button>
+          {
+            // <Svg height="150" width="300">
+            //   <Defs>
+            //     <LinearGradient id="grad" x1="0" y1="0" x2="170" y2="0">
+            //       <Stop offset="0" stopColor="rgb(255,255,0)" stopOpacity="0" />
+            //       <Stop offset="1" stopColor="red" stopOpacity="1" />
+            //     </LinearGradient>
+            //   </Defs>
+            //   <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
+            // </Svg>
+            // <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+            //   <Text style={styles.buttonText}>
+            //     Sign in with Facebook
+            //   </Text>
+            // </LinearGradient>
+            // <LinearGradient
+            //   start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
+            //   locations={[0,0.5,0.6]}
+            //   colors={['#4c669f', '#3b5998', '#192f6a']}
+            //   style={styles.linearGradient}>
+            //   <Text style={styles.buttonText}>
+            //     Sign in with Facebook
+            //   </Text>
+            // </LinearGradient>
+          }
         </View>
-      </View>
-      <View style={styles.topLinks}>
-        <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
-        <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
-      </View>
+      );
+  }
+}
 
-      <Item />
+// const Index = props => {
+//   return (
+//     <View >
+//       <View style={styles.banner}>
+//         <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
+//         </Image>
+//         <View style={styles.search}>
+//           <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
+//           <Text style={styles.searchInput}>搜索</Text>
+//         </View>
+//       </View>
+//       <View style={styles.topLinks}>
+//         <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
+//         <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
+//       </View>
 
-      {
-        // <Svg height="150" width="300">
-        //   <Defs>
-        //     <LinearGradient id="grad" x1="0" y1="0" x2="170" y2="0">
-        //       <Stop offset="0" stopColor="rgb(255,255,0)" stopOpacity="0" />
-        //       <Stop offset="1" stopColor="red" stopOpacity="1" />
-        //     </LinearGradient>
-        //   </Defs>
-        //   <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
-        // </Svg>
-        // <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
-        //   <Text style={styles.buttonText}>
-        //     Sign in with Facebook
-        //   </Text>
-        // </LinearGradient>
-        // <LinearGradient
-        //   start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-        //   locations={[0,0.5,0.6]}
-        //   colors={['#4c669f', '#3b5998', '#192f6a']}
-        //   style={styles.linearGradient}>
-        //   <Text style={styles.buttonText}>
-        //     Sign in with Facebook
-        //   </Text>
-        // </LinearGradient>
-      }
-    </View>
-  );
-};
+//       <Item />
+
+//       {
+//         // <Svg height="150" width="300">
+//         //   <Defs>
+//         //     <LinearGradient id="grad" x1="0" y1="0" x2="170" y2="0">
+//         //       <Stop offset="0" stopColor="rgb(255,255,0)" stopOpacity="0" />
+//         //       <Stop offset="1" stopColor="red" stopOpacity="1" />
+//         //     </LinearGradient>
+//         //   </Defs>
+//         //   <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
+//         // </Svg>
+//         // <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+//         //   <Text style={styles.buttonText}>
+//         //     Sign in with Facebook
+//         //   </Text>
+//         // </LinearGradient>
+//         // <LinearGradient
+//         //   start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
+//         //   locations={[0,0.5,0.6]}
+//         //   colors={['#4c669f', '#3b5998', '#192f6a']}
+//         //   style={styles.linearGradient}>
+//         //   <Text style={styles.buttonText}>
+//         //     Sign in with Facebook
+//         //   </Text>
+//         // </LinearGradient>
+//       }
+//     </View>
+//   );
+// };
 
 const padding = 12;
 const inputH = 60;
@@ -136,4 +196,4 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default Index
+export default Index;
