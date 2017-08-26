@@ -4,3 +4,5 @@ npm-debug.*
 haste-map-react-*
 react-native-packager-*
 README2.md
+.DS_Store
+**/.DS_Store
