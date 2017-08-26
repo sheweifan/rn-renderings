@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Item from '../../components/Item';
+import ImgsItem from '../../components/ImgsItem';
 // import Detail from '../../containers/Detail';
 // import LinearGradient from 'react-native-linear-gradient';
-// import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient'; 
+//  http://ionicframework.com/docs/ionicons/
 const {height, width} = Dimensions.get('window');
 
 class Index extends React.Component {
@@ -15,7 +16,7 @@ class Index extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-        <View >
+        <View style={styles.container}>
           <View style={styles.banner}>
             <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
             </Image>
@@ -24,19 +25,24 @@ class Index extends React.Component {
               <Text style={styles.searchInput}>搜索</Text>
             </View>
           </View>
-          <View style={styles.topLinks}>
-            <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
-            <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
-          </View>
-
-          <Item />
-
-
-          <Button 
-            onPress={() => navigate('Detail')}
-            title="DETAIL"
-          ></Button>
           {
+            <View style={styles.topLinks}>
+              <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
+              <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
+            </View>
+          }
+
+          <ImgsItem />
+
+
+          
+          {
+
+            // <Button 
+            //   onPress={() => navigate('Detail')}
+            //   title="DETAIL"
+            // ></Button>
+
             // <Svg height="150" width="300">
             //   <Defs>
             //     <LinearGradient id="grad" x1="0" y1="0" x2="170" y2="0">
@@ -115,8 +121,13 @@ class Index extends React.Component {
 
 const padding = 12;
 const inputH = 60;
-const bannerH = width*500/750;
+// const bannerH = width*500/750;
+const bannerH = width*250/750;
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
   banner: {
     height: bannerH+inputH/2,
     position: 'relative'
@@ -143,11 +154,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     shadowOffset: {
       width: 0, 
-      height: 0 
+      height: 0
     }, 
     shadowColor:'black', 
-    shadowOpacity:0.2, 
-    shadowRadius:2
+    shadowOpacity: 0.2, 
+    shadowRadius: 5,
+    elevation: 5,
+    // borderWidth: 1,
+    // borderColor: '#e5e5e5'
   },
   searchInput: {
     fontSize: 14,
