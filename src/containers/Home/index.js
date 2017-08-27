@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ImgsItem from '../../components/ImgsItem';
+import Img from '../../components/Img';
+import Imgs from '../../components/Imgs';
 // import Detail from '../../containers/Detail';
 // import LinearGradient from 'react-native-linear-gradient';
 // import LinearGradient from 'react-native-linear-gradient'; 
@@ -31,13 +32,12 @@ class Index extends React.Component {
               <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
             </View>
           }
-
-          <ImgsItem />
-
-
+          <Img />
+          <Text>1123</Text>
           
           {
 
+          // <Imgs />
             // <Button 
             //   onPress={() => navigate('Detail')}
             //   title="DETAIL"
