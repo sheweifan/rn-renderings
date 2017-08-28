@@ -5,22 +5,40 @@ const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 const Imgs = props => {
   return (
-    <TouchableHighlight>
-      <View style={styles.item}>
-          <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
-          <View style={styles.itemBottom}>
-            <View style={styles.itemStyleCount}>
-              <Text style={[styles.itemText,styles.itemStyle]}>现代简约</Text>
-              <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
-              <Text style={[styles.itemText,styles.itemCount]}>4图</Text>
+    <View>
+      <TouchableHighlight>
+        <View style={styles.item}>
+            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
+            <View style={styles.itemBottom}>
+              <View style={styles.itemStyleCount}>
+                <Text style={[styles.itemText,styles.itemStyle]}>现代简约</Text>
+                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
+                <Text style={[styles.itemText,styles.itemCount]}>4图</Text>
+              </View>
             </View>
-          </View>
-          <Image style={styles.itemTitle} source={{uri: shadowBase64}}>
-            <Text style={styles.itemTitleInfo} numberOfLines={1}>现代简约清新效新效果图</Text>
-          </Image>
-          <Image style={styles.itemAvatar} source={{uri:'https://dummyimage.com/114x114/c8d2c2'}}/>
-      </View>
-    </TouchableHighlight>
+            <Image style={styles.itemTitle} source={{uri: shadowBase64}}>
+              <Text style={styles.itemTitleInfo} numberOfLines={1}>现代简约清新效新效果图</Text>
+            </Image>
+            <Image style={styles.itemAvatar} source={{uri:'https://dummyimage.com/114x114/c8d2c2'}}/>
+        </View>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <View style={styles.item}>
+            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
+            <View style={styles.itemBottom}>
+              <View style={styles.itemStyleCount}>
+                <Text style={[styles.itemText,styles.itemStyle]}>现代简约</Text>
+                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
+                <Text style={[styles.itemText,styles.itemCount]}>4图</Text>
+              </View>
+            </View>
+            <Image style={styles.itemTitle} source={{uri: shadowBase64}}>
+              <Text style={styles.itemTitleInfo} numberOfLines={1}>现代简约清新效新效果图</Text>
+            </Image>
+            <Image style={styles.itemAvatar} source={{uri:'https://dummyimage.com/114x114/c8d2c2'}}/>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 };
 
