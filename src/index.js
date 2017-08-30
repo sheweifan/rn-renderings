@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 // import { SegmentedControl, WingBlank, TabBar } from 'antd-mobile';
 import Index from './containers/Home';
 import Detail from './containers/Detail';
+import Search from './containers/Search';
 import { StackNavigator } from 'react-navigation';
 
 class App extends React.Component {
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
 });
 
 export default StackNavigator({
-  Detail: { screen: Detail },
+  Search: { screen: Search },
   Home: { screen: Index },
+  Detail: { screen: Detail },
 });
