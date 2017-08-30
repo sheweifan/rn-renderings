@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
 });
 
 export default StackNavigator({
-  Home: { screen: Index },
   Detail: { screen: Detail },
+  Home: { screen: Index },
 });
