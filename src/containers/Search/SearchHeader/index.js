@@ -7,7 +7,6 @@ import {
   Dimensions, 
   TouchableOpacity, 
   TextInput,
-  findNodeHandle,
   Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -32,7 +31,7 @@ class SearchHeader extends React.Component{
             style={styles.select}
             onPress={this.selectChange.bind(this)}
           >
-            <Text style={styles.selectText}>单图</Text>
+            <Text style={styles.selectText}>单图单</Text>
             <View
               style={styles.iconOuter} 
               ref='selectTarget'
@@ -58,20 +57,47 @@ class SearchHeader extends React.Component{
 
         </View>
 
-        <View style={[styles.selectxxx,{
-          left: this.state.pageX,          
-          top: this.state.pageY         
-        }]}></View>
+        <Modal
+          animationType="none"
+          transparent={true}
+          visible={true}
+          >
+
+          <View style={styles.selectMask}></View>
+          <View style={[styles.iconOuter,styles.closeSelect,{
+            left: this.state.pageX,          
+            top: this.state.pageY         
+          }]}>
+            <Icon name="md-close" size={18} color="#fff" />
+          </View>
+        </Modal>
       </View>
     )
   }
   componentDidMount(){
+
+    // <View style={styles.selectMask}></View>
+    // <Modal
+    //   animationType="none"
+    //   transparent={true}
+    //   visible={true}
+    //   >
+    // </Modal>
     // var tag = findNodeHandle(this.refs.selectTarget)
     // console.log(this.selectTarget);
     // console.log(findNodeHandle(this.selectTarget));
-    this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
-        console.log(x,y,width,pageX,pageY,height);
-    })
+    // this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
+    //     console.log(x,y,width,pageX,pageY,height);
+    // })
+    setTimeout(()=>{
+      this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
+        console.log(pageX,pageY);
+        this.setState({
+          pageX,
+          pageY
+        })
+      })
+    },1500)
   }
   selectChange(){
     // var tag = findNodeHandle(this.refs.selectTarget)
@@ -156,12 +182,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 3,
   },
-  selectxxx:{
+  closeSelect:{
     position: 'absolute',
-    width: 30,
-    height: 30,
-    opacity: 0.5,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+    marginLeft: 0,
+    marginRight: 0
+  },
+  selectMask: {
+    flex: 1,
+    backgroundColor: 'rgba(255,255,255,0.9)'
   }
 })
 
