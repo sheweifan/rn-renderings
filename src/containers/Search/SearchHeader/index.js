@@ -160,7 +160,7 @@ class SearchHeader extends React.Component{
   }
   selectChange(isOpen){
     const {selectAnimate} = this.state;
-
+    console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
     if(isOpen){
 
       this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
