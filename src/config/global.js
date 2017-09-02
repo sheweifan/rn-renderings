@@ -1,8 +1,6 @@
+import Platform, {OS} from 'Platform';
 
-import Platform from 'Platform';
-const Global = {
+export default {
   appOft: 13, // 顶栏目测高度。。
-  os: Platform.OS
-}
-
-export default Global;
+  os: OS
+};
