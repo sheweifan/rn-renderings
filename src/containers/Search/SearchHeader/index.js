@@ -56,6 +56,7 @@ class SearchHeader extends React.Component{
           <TouchableOpacity 
             style={styles.select}
             onPress={this.selectChange.bind(this,true)}
+            activeOpacity={1}
           >
             <Text style={styles.selectText}>单图单</Text>
             <View
@@ -160,7 +161,7 @@ class SearchHeader extends React.Component{
   }
   selectChange(isOpen){
     const {selectAnimate} = this.state;
-    console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
+    // console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
     if(isOpen){
 
       this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
