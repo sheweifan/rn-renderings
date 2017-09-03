@@ -39,12 +39,13 @@ class SearchHeader extends React.Component{
       pageX: 500,
       pageY: 500,
       modelShow: false,
-      selectAnimate: new Animated.Value(0)
+      selectAnimate: new Animated.Value(0),
+      selected: 0
     };
 
   }
   render(){
-    const { pageX, pageY, modelShow, selectAnimate} = this.state;
+    const { pageX, pageY, modelShow, selectAnimate, selected} = this.state;
     return (
       <View style={styles.header}>
 
@@ -55,10 +56,12 @@ class SearchHeader extends React.Component{
         <View style={styles.headerInner}>
           <TouchableOpacity 
             style={styles.select}
-            onPress={this.selectChange.bind(this,true)}
+            onPress={this.selectModalChange.bind(this,true)}
             activeOpacity={1}
           >
-            <Text style={styles.selectText}>单图单</Text>
+            <Text style={styles.selectText}>
+              { selectData[selected].name }
+            </Text>
             <View
               style={styles.iconOuter} 
               ref="selectTarget"
@@ -134,13 +137,16 @@ class SearchHeader extends React.Component{
                         }
                       ]} 
                     >
-                      <Text style={styles.selectItemText}>{item.name}</Text>
+                      <TouchableOpacity style={styles.selectItemInner} onPress={this.selectChange.bind(this,i)}>
+                        <Text style={styles.selectItemText}>{item.name}</Text>
+                      </TouchableOpacity>
+                      
                     </Animated.View>
                   )
                 )
               }
               <TouchableOpacity 
-                onPress={this.selectChange.bind(this,false)}
+                onPress={this.selectModalChange.bind(this,false)}
                 style={[styles.iconOuter,styles.iconSelect]}
               >
                 <Icon name="md-close" size={18} color="#fff" />
@@ -159,44 +165,55 @@ class SearchHeader extends React.Component{
     // },50)
 
   }
-  selectChange(isOpen){
+  selectModalChange(isOpen){
     const {selectAnimate} = this.state;
-    // console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
-    if(isOpen){
+    return new Promise((res,rej)=>{
+      if(isOpen){
 
-      this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
-        this.setState({
-          modelShow: isOpen,
-          pageX,
-          pageY: pageY - ( _g.os === 'android' ? _g.appOft : 0 )
-        });
+        this.refs.selectTarget.measure((x,y,width,height,pageX,pageY)=>{
+          this.setState({
+            modelShow: isOpen,
+            pageX,
+            pageY: pageY - ( _g.os === 'android' ? _g.appOft : 0 ),
+          });
 
+          Animated.timing(this.state.selectAnimate, {
+            toValue: ( isOpen ? 1 : 0), // 目标值
+            duration: 400, // 动画时间
+          }).start();
+        })
+      }else{
         Animated.timing(this.state.selectAnimate, {
             toValue: ( isOpen ? 1 : 0), // 目标值
-            duration: 500, // 动画时间
-        }).start();
-      })
-    }else{
-      Animated.timing(this.state.selectAnimate, {
-          toValue: ( isOpen ? 1 : 0), // 目标值
-          duration: 500, // 动画时间
-      }).start(()=>{
-        // this.setState({
-        //   modelShow: isOpen,
-        // });
-      });
-
-      setTimeout(()=>{
-        this.setState({
-          modelShow: isOpen,
+            duration: 400, // 动画时间
+        }).start(()=>{
+          // this.setState({
+          //   modelShow: isOpen,
+          // });
+          res();
         });
-      },350)
 
-    }
+        setTimeout(()=>{
+          this.setState({
+            modelShow: isOpen,
+          },()=>{
+            res();
+          });
+        },300);
 
+      }
+    })
+    // console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
+    
+  }
+  selectChange(idx){
 
-
-
+    this.selectModalChange(false)
+      .then(()=>{
+        this.setState({
+          selected: idx
+        })
+      })
   }
 }
 // console.log(2222,global.appOft)
@@ -291,9 +308,6 @@ const styles = StyleSheet.create({
     marginTop: -iconW/2,
     position: 'absolute',
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
   },
   selectItem0: {
     backgroundColor: '#3c3cb4',
@@ -303,6 +317,12 @@ const styles = StyleSheet.create({
   },
   selectItem2: {
     backgroundColor: '#07c0e7',
+  },
+  selectItemInner: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   selectItemText: {
     color: '#fff',
