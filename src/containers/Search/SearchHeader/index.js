@@ -40,12 +40,13 @@ class SearchHeader extends React.Component{
       pageY: 500,
       modelShow: false,
       selectAnimate: new Animated.Value(0),
-      selected: 0
+      selected: 0,
+      searchKey: ''
     };
 
   }
   render(){
-    const { pageX, pageY, modelShow, selectAnimate, selected} = this.state;
+    const { pageX, pageY, modelShow, selectAnimate, selected, searchKey} = this.state;
     return (
       <View style={styles.header}>
 
@@ -79,11 +80,18 @@ class SearchHeader extends React.Component{
             underlineColorAndroid="transparent" 
             placeholder="请输入搜索内容" 
             style={styles.searchInput}
+            value={searchKey}
+            onChangeText={(sk)=> this.searchKeyChange.call(this,sk)}
           />
 
-          <View style={styles.iconOuter}>
-            <Icon name="md-close" size={18} color="#fff" />
-          </View>
+          {
+            searchKey === ''
+            ? null
+            : (<TouchableOpacity style={styles.iconOuter} onPress={this.searchKeyChange.bind(this,'')}>
+                <Icon name="md-close" size={18} color="#fff" />
+              </TouchableOpacity>)
+          }
+          
 
         </View>
 
@@ -164,6 +172,12 @@ class SearchHeader extends React.Component{
     //   this.selectChange();
     // },50)
 
+  }
+  searchKeyChange(text){
+    console.log(text);
+    this.setState({
+      searchKey: text
+    });
   }
   selectModalChange(isOpen){
     const {selectAnimate} = this.state;
