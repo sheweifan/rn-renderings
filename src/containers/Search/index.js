@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const {width, height} = Dimensions.get('window');
 
 import SearchHeader from './SearchHeader'
+import SearchHistory from './SearchHistory'
 
 
 class Search extends React.Component{
@@ -21,17 +22,23 @@ class Search extends React.Component{
   // }
   render(){
     return (
-      <View>
+      <View style={styles.searchOuter}>
         <SearchHeader />
-        <Text>
-          SEARCH
-        </Text>
+        <SearchHistory />
+        {
+          // <Text>
+          //   SEARCH
+          // </Text>
+        }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  searchOuter: {
+    flex: 1
+  }
 })
 
 

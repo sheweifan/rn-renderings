@@ -245,7 +245,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     // height: 50
-    alignItems: 'center'
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e6e6e6'
   },
   headerInner: {
     // flexShrink: 0,
@@ -280,12 +282,13 @@ const styles = StyleSheet.create({
     paddingLeft: 12
   },
   selectText: {
-    fontSize: 15
+    fontSize: 15,
   },
   searchInput: {
     // flexShrink: 0
     flexGrow: 2,
-    fontSize: 15
+    fontSize: 15,
+    height: 30
   },
   iconOuter: {
     width: iconW,
