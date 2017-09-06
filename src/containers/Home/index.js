@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
-import { TabBar } from 'antd-mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Img from '../../components/Img';
 import Imgs from '../../components/Imgs';
@@ -17,17 +16,19 @@ const {height, width} = Dimensions.get('window');
 class Index extends React.Component {
   static navigationOptions = {
     tabBarLabel: '首页',
+    tabBarIcon: ({focused}) => {
+      // console.log(a)
 
-    tabBarIcon: ({tintColor}) => (
-            <Image
-                source={icon_index}
-                style={[{tintColor: tintColor},{
-                  height: 22,
-                  width: 22,
-                  resizeMode: 'contain'
-                }]}
-            />
-        ),
+      return <Image
+          source={focused?icon_index_active:icon_index}
+          style={[{
+            height: 25,
+            width: 25,
+            resizeMode: 'contain'
+          }]}
+      />
+    },
+    header: null
   };
   render() {
     const { navigate } = this.props.navigation;
