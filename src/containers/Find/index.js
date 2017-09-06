@@ -14,9 +14,9 @@ import icon_find_active from '../../static/images/nav/icon_find_active.png'
 
 const {height, width} = Dimensions.get('window');
 
-const FindItem = ({Id,text,img})=>{
+const FindItem = ({text,img})=>{
   return (
-    <TouchableOpacity style={styles.findItem} key={Id}>
+    <TouchableOpacity style={styles.findItem}>
       <Image style={styles.findItemImg} source={{uri:imgPrefix+img}}>
         <Text style={styles.findItemText}>
           {text}
@@ -25,9 +25,9 @@ const FindItem = ({Id,text,img})=>{
     </TouchableOpacity>
   )
 }
-const FindTitle = ({title,type})=>{
+const FindTitle = ({title})=>{
   return (
-    <View style={styles.findTitle} key={type}>
+    <View style={styles.findTitle}>
       <Text style={styles.findTitleText}>{title}</Text>
     </View>
   )
@@ -36,9 +36,6 @@ const FindTitle = ({title,type})=>{
 class Find extends React.Component {
   static navigationOptions = {
     tabBarLabel: '发现',
-    headerStyle: {
-      backgroundColor: '#fff'
-    },
     tabBarIcon: ({focused}) => {
       // console.log(a)
       return <Image
@@ -50,20 +47,26 @@ class Find extends React.Component {
           }]}
       />
     },
-    headerTitle: '发现'
+    headerTitle: '发现',
     // header: null
   };
+  goMap(){
+    this.props.navigation.navigate('MapList')
+  }
   render() {
     return (
       <ScrollView>
         <View style={styles.findContainer}>
           {
-
             data.map(item=>(
-              <View>
-                  <FindTitle title={item.typeText} type={item.type}/>
+              <View key={item.type}>
+                  <FindTitle title={item.typeText}/>
                   <View style={styles.findList}>
-                    { item.child.map(cItem=> <FindItem {...cItem} /> ) }
+                    { item.child.map(cItem=> <FindItem {...cItem}  key={cItem.Id}/> ) }
+                    <TouchableOpacity style={[styles.findItem,styles.findItemMore]} onPress={this.goMap.bind(this)}>
+                      <Text style={styles.findItemMoreCh}>更多{item.typeText}</Text>
+                      <Text style={styles.findItemMoreEn}>More</Text>
+                    </TouchableOpacity>
                   </View>
               </View>)
             )
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
     width: itemW,
     height: itemW,
     margin: padding/2,
-
   },
   findItemImg:{
     width: itemW,
@@ -126,7 +128,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingBottom: padding/2,
-  }
+  },
+  findItemMore: {
+    borderColor: '#e6e6e6',
+    borderWidth: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  findItemMoreCh: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: '#000'
+  },
+  findItemMoreEn: {
+    fontSize: 11,
+    lineHeight: 15,
+    color: '#999'
+  },
+
 });
 
 export default Find;

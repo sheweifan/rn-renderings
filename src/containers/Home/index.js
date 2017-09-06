@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Img from '../../components/Img';
 import Imgs from '../../components/Imgs';
@@ -33,7 +33,7 @@ class Index extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.banner}>
           <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
           </Image>
@@ -47,7 +47,7 @@ class Index extends React.Component {
           <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
         </View>
         <Imgs />
-      </View>
+      </ScrollView>
       );
   }
 }
@@ -182,7 +182,6 @@ const inputH = 60;
 const bannerH = width*250/750;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff'
   },
   banner: {
