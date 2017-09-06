@@ -174,7 +174,7 @@ class SearchHeader extends React.Component{
 
   }
   searchKeyChange(text){
-    console.log(text);
+    // console.log(text);
     this.setState({
       searchKey: text
     });
