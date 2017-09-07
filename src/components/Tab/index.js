@@ -26,15 +26,15 @@ const Tab = ({items,active,tabChange})=> {
             activeOpacity="1"
             style={[
               styles.tabItem,
-              (active===item.id?styles.tabItemActive:{})
+              (active===i?styles.tabItemActive:{})
             ]} 
-            key={item.id} 
-            onPress={ ()=>tabChange(item.id) }
+            key={i} 
+            onPress={ ()=>tabChange(i) }
           >
             <Text 
               style={[
                 styles.tabItemText,
-                (active===item.id?styles.tabItemTextActive:{})
+                (active===i?styles.tabItemTextActive:{})
               ]}
             >
               {item.text}

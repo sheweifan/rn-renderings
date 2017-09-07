@@ -1,25 +1,82 @@
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity,Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const FillterBar = ({items,active,fillterChange})=> {
-  return (<View style={[styles.fillterBar]}>
-    {
-      items.map(
-        ({id,text},i)=>(
-          <TouchableOpacity style={[styles.fillterBarItem]} key={id}>
-            <Text style={styles.fillterBarItemText}>{text}</Text>
-            <Icon style={styles.fillterBarItemIcon} name="ios-arrow-down" size={16} color='#a1a1a1' />
-            {
-              i === items.length-1
-              ? null
-              : <View style={styles.fillterBarItemLine}></View>
-            }
-          </TouchableOpacity>
+// const FillterBar = ({items,active,fillterChange})=> {
+  
+// }
+
+class FillterBar extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.fillterAnimate=props.items.map(()=> new Animated.Value(0))
+
+    // console.log(  )
+  }
+  render(){
+    const { fillterAnimate, props } = this;
+    const { items,active } = props;
+    return (<View style={[styles.fillterBar]}>
+      {
+        items.map(
+          ({id,text},i)=>(
+            <TouchableOpacity 
+              activeOpacity="1"
+              style={[styles.fillterBarItem]} 
+              key={i} 
+              onPress={this.fillterChange.bind(this,i)}
+            >
+              <Text style={styles.fillterBarItemText}>{text}</Text>
+              <Animated.View 
+                style={[
+                  styles.fillterBarItemIcon,
+                  {
+                    transform: [
+                      {
+                        rotate: fillterAnimate[i].interpolate({
+                          inputRange: [0, 1],
+                          outputRange: ['0deg', '180deg'],
+                        }),
+                      } 
+                    ]
+                  }
+                ]}
+              >
+                <Icon name="ios-arrow-down" size={16} color='#a1a1a1' />
+              </Animated.View>
+              {
+                i === items.length-1
+                ? null
+                : <View style={styles.fillterBarItemLine}></View>
+              }
+            </TouchableOpacity>
+          )
         )
-      )
+      }
+    </View>)
+  }
+  fillterChange(idx){
+    const { items,active,fillterChange } = this.props;
+    const _idx = (idx === active? null:idx);
+    fillterChange(_idx)
+  }
+  componentDidUpdate(prevProps,prevState){
+
+    const { fillterAnimate, props } = this;
+    const { items,active,fillterChange } = props;
+    for(let i in fillterAnimate){
+      Animated.timing(
+        fillterAnimate[i],{
+          toValue: ( parseInt(i) === active ? 1 : 0),
+          duration: 500,
+          // easing: Easing.linear
+        }
+      ).start()
     }
-  </View>)
+
+
+  }
 }
 const padding = 12;
 const styles = StyleSheet.create({
@@ -44,7 +101,8 @@ const styles = StyleSheet.create({
   },
   fillterBarItemIcon: {
     marginLeft: 7,
-    marginTop: 4
+    // marginTop: 4,
+    // marginBottom: 4
   },
   fillterBarItemLine: {
     width: 1,

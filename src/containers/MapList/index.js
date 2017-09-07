@@ -67,16 +67,19 @@ class MapList extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      tabActive: tabOpts.items[0].id
+      tabActive: 0,
+      fillterActive: null
     }
   }
   render() {
     const { navigate } = this.props.navigation;
-    const { tabActive } = this.state;
+    const { tabActive,fillterActive } = this.state;
     return (
       <View style={styles.container}>
         <FillterBar 
           {...FillterOpts}
+          active={fillterActive}
+          fillterChange={this.fillterChange.bind(this)}
         />
         <ScrollView>
           <Text>
@@ -89,6 +92,11 @@ class MapList extends React.Component {
         </ScrollView>
       </View>
       );
+  }
+  fillterChange(fillterActive){
+    this.setState({
+      fillterActive
+    })
   }
   tabChange(tabActive){
     // console.log(tabActive);
@@ -105,13 +113,12 @@ class MapList extends React.Component {
       // }
     })
   }
-  shouldComponentUpdate(prevProps,{tabActive}){
+  componentDidUpdate(prevProps,{tabActive}){
     if(tabActive !== this.state.tabActive){
       this.props.navigation.setParams({
-        tabActive: tabActive
+        tabActive: this.state.tabActive
       })
     }
-    return true;
   }
 }
 
