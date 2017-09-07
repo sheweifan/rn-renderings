@@ -37,8 +37,8 @@ const MainScreenNavigator = TabNavigator(
 
 
 export default StackNavigator({
-  Home: { screen: MainScreenNavigator },
   MapList: { screen: MapList },
+  Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
   Detail: { screen: Detail },
 },{
@@ -51,7 +51,7 @@ export default StackNavigator({
     },
     headerTitleStyle:{
       textAlign: 'center'
-    }
+    },
   }
 });
 
