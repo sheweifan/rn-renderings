@@ -46,13 +46,14 @@ class SearchHeader extends React.Component{
 
   }
   render(){
-    const { pageX, pageY, modelShow, selectAnimate, selected, searchKey} = this.state;
+    const { pageX, pageY, modelShow, selectAnimate, selected, searchKey } = this.state;
+    const {goBack} = this.props.navigation;
     return (
       <View style={styles.header}>
 
-        <View style={styles.headerBack}>
+        <TouchableOpacity style={styles.headerBack} onPress={()=>goBack()}>
           <Icon name="md-arrow-back" size={28} color="#333"/>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.headerInner}>
           <TouchableOpacity 

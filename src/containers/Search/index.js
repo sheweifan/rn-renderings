@@ -20,10 +20,14 @@ class Search extends React.Component{
   // constructor(props){
   //   super(props);
   // }
+  constructor(props){
+    super(props);
+  }
   render(){
+    const { navigation } = this.props;
     return (
       <View style={styles.searchOuter}>
-        <SearchHeader />
+        <SearchHeader navigation={navigation} />
         <SearchHistory />
         {
           // <Text>

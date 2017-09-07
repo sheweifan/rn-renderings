@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Img from '../../components/Img';
 import Imgs from '../../components/Imgs';
@@ -37,10 +37,10 @@ class Index extends React.Component {
         <View style={styles.banner}>
           <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
           </Image>
-          <View style={styles.search}>
+          <TouchableOpacity style={styles.search} onPress={()=>this.props.navigation.navigate('Search')}>
             <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
             <Text style={styles.searchInput}>搜索</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.topLinks}>
           <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
@@ -178,8 +178,8 @@ class Index extends React.Component {
 
 const padding = 12;
 const inputH = 60;
-// const bannerH = width*500/750;
-const bannerH = width*250/750;
+const bannerH = width*500/750;
+// const bannerH = width*250/750;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff'

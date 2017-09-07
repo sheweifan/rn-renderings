@@ -38,16 +38,20 @@ const MainScreenNavigator = TabNavigator(
 
 export default StackNavigator({
   Home: { screen: MainScreenNavigator },
+  MapList: { screen: MapList },
   Search: { screen: Search },
   Detail: { screen: Detail },
-  MapList: { screen: MapList },
 },{
   navigationOptions:{
+    // header: null,
     headerBackTitle: null,
     headerTintColor: '#000000',
     headerStyle: {
       backgroundColor: '#fff'
     },
+    headerTitleStyle:{
+      textAlign: 'center'
+    }
   }
 });
 

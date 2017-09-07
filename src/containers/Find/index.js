@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, ScrollView, TouchableOpacity} from 'react-native';
-
 // import Detail from '../../containers/Detail';
 // import LinearGradient from 'react-native-linear-gradient';
 // import LinearGradient from 'react-native-linear-gradient'; 
@@ -55,24 +54,26 @@ class Find extends React.Component {
   }
   render() {
     return (
-      <ScrollView>
-        <View style={styles.findContainer}>
-          {
-            data.map(item=>(
-              <View key={item.type}>
-                  <FindTitle title={item.typeText}/>
-                  <View style={styles.findList}>
-                    { item.child.map(cItem=> <FindItem {...cItem}  key={cItem.Id}/> ) }
-                    <TouchableOpacity style={[styles.findItem,styles.findItemMore]} onPress={this.goMap.bind(this)}>
-                      <Text style={styles.findItemMoreCh}>更多{item.typeText}</Text>
-                      <Text style={styles.findItemMoreEn}>More</Text>
-                    </TouchableOpacity>
-                  </View>
-              </View>)
-            )
-          }
-        </View>
-      </ScrollView>
+      <View style={styles.findContainer}>
+        <ScrollView>
+          <View style={styles.findScrollContainer}>
+            {
+              data.map(item=>(
+                <View key={item.type}>
+                    <FindTitle title={item.typeText}/>
+                    <View style={styles.findList}>
+                      { item.child.map(cItem=> <FindItem {...cItem}  key={cItem.Id}/> ) }
+                      <TouchableOpacity style={[styles.findItem,styles.findItemMore]} onPress={this.goMap.bind(this)}>
+                        <Text style={styles.findItemMoreCh}>更多{item.typeText}</Text>
+                        <Text style={styles.findItemMoreEn}>More</Text>
+                      </TouchableOpacity>
+                    </View>
+                </View>)
+              )
+            }
+          </View>
+        </ScrollView>
+      </View>
       );
   }
 }
@@ -83,6 +84,9 @@ const itemW = (width - padding*4) /3;
 // // const bannerH = width*500/750;
 // const bannerH = width*250/750;
 const styles = StyleSheet.create({
+  findContainer:{
+    flex: 1
+  },
   findItem: {
     width: itemW,
     height: itemW,
@@ -113,10 +117,11 @@ const styles = StyleSheet.create({
   },
   findTitleText: {
     fontSize: 16,
+    fontWeight: '900',
     color: '#000'
   },
 
-  findContainer: {
+  findScrollContainer: {
     backgroundColor: '#fff',
     marginBottom: 20,
     marginTop: 20,
