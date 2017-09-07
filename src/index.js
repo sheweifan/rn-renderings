@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
+import _g from './config/global.js';
+
 import Index from './containers/Home';
 import Find from './containers/Find';
 import Detail from './containers/Detail';
@@ -25,32 +27,54 @@ const MainScreenNavigator = TabNavigator(
       activeTintColor: '#000', // 文字和图片选中颜色
       inactiveTintColor: '#999', // 文字和图片默认颜色
       showIcon: true, // android 默认不显示 icon, 需要设置为 true 才会显示
-      indicatorStyle: {height: 0}, // android 中TabBar下面会显示一条线，高度设为 0 后就不显示线了
-      style: {
-          backgroundColor: '#fff', // TabBar 背景色
+      indicatorStyle: { height: 0 }, // android 中TabBar下面会显示一条线，高度设为 0 后就不显示线了
+      style:{
+        // paddingBottom: 0,
+        // height: 40,
+        backgroundColor: '#fff', // TabBar 背景色
+        borderTopWidth: 1,
+        borderTopColor: '#ececec',
+        paddingBottom: 0,
+        paddingTop: 0,
+        // height: 50
+      },
+      indicatorStyle:{
+        height: 0
       },
       labelStyle: {
-          fontSize: 12, // 文字大小
+        fontSize: 12, // 文字大小
+        marginBottom: 0,
+        marginTop: 0
+      
       },
+      // iconStyle:{
+      //   paddingTop:0,
+      //   paddingBottom:0
+      // }
     },
 });
 
-
 export default StackNavigator({
-  MapList: { screen: MapList },
   Home: { screen: MainScreenNavigator },
+  MapList: { screen: MapList },
   Search: { screen: Search },
   Detail: { screen: Detail },
 },{
+  gesturesEnabled: false, // 是否允许右滑返回，在iOS上默认为true，在Android上默认为false
   navigationOptions:{
     // header: null,
     headerBackTitle: null,
     headerTintColor: '#000000',
     headerStyle: {
-      backgroundColor: '#fff'
+      elevation: 0,
+      backgroundColor: '#fff',
+      ...(_g.os === 'android'? _g.androidFixNavStyle : {})
     },
     headerTitleStyle:{
-      textAlign: 'center'
+      alignSelf: 'center'
+      // display: 'flex',
+      // justifyContent: 'center',
+      // alignItems: 'center'
     },
   }
 });

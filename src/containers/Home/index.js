@@ -37,7 +37,11 @@ class Index extends React.Component {
         <View style={styles.banner}>
           <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
           </Image>
-          <TouchableOpacity style={styles.search} onPress={()=>this.props.navigation.navigate('Search')}>
+          <TouchableOpacity 
+            activeOpacity={1}
+            style={styles.search}
+            onPress={()=>this.props.navigation.navigate('Search')}
+          >
             <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
             <Text style={styles.searchInput}>搜索</Text>
           </TouchableOpacity>

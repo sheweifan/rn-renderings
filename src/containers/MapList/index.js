@@ -9,6 +9,8 @@ import FillterBar from '../../components/FillterBar';
 import icon_index from '../../static/images/nav/icon_index.png'
 import icon_index_active from '../../static/images/nav/icon_index_active.png'
 
+import _g from '../../config/global.js';
+
 // import Detail from '../../containers/Detail';
 // import LinearGradient from 'react-native-linear-gradient';
 // import LinearGradient from 'react-native-linear-gradient'; 
@@ -50,6 +52,7 @@ const FillterOpts= {
 
 class MapList extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
+    console.log('navigation1111',navigation)
     const { params } = navigation.state;
     return {
       headerTitle:  <Tab 
@@ -59,8 +62,8 @@ class MapList extends React.Component {
       />,
       headerStyle: {
         backgroundColor: '#fff',
-        display: 'flex',
-        ...(params ? params.headerStyle: {} )
+        ...(params ? params.headerStyle: {} ),
+        ...(_g.os === 'android'? {paddingRight: 50, ..._g.androidFixNavStyle} : {})
       },
     }
   };
@@ -85,8 +88,8 @@ class MapList extends React.Component {
           <Text>
             {
               tabActive === 1
-              ? '单图'
-              : '套图'
+              ? '套图'
+              : '单图'
             }
           </Text>
         </ScrollView>

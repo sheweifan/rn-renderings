@@ -345,7 +345,6 @@ const styles = StyleSheet.create({
   selectItemText: {
     color: '#fff',
     fontSize: 12,
-    lineHeight: 24
   }
 })
 

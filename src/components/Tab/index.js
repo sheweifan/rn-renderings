@@ -23,7 +23,7 @@ const Tab = ({items,active,tabChange})=> {
       items.map(
         (item,i) => (
           <TouchableOpacity 
-            activeOpacity="1"
+            activeOpacity={1}
             style={[
               styles.tabItem,
               (active===i?styles.tabItemActive:{})
@@ -50,7 +50,9 @@ const styles = StyleSheet.create({
   tab:{
     display: 'flex',
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    alignSelf: 'center'
+
   },
   tabItem:{
     paddingLeft: padding/2,

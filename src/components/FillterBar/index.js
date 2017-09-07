@@ -22,7 +22,7 @@ class FillterBar extends React.Component{
         items.map(
           ({id,text},i)=>(
             <TouchableOpacity 
-              activeOpacity="1"
+              activeOpacity={1}
               style={[styles.fillterBarItem]} 
               key={i} 
               onPress={this.fillterChange.bind(this,i)}
