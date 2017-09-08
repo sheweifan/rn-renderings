@@ -45,7 +45,6 @@ const MainScreenNavigator = TabNavigator(
         fontSize: 12, // 文字大小
         marginBottom: 0,
         marginTop: 0
-      
       },
       // iconStyle:{
       //   paddingTop:0,
@@ -55,8 +54,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  Home: { screen: MainScreenNavigator },
   MapList: { screen: MapList },
+  Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
   Detail: { screen: Detail },
 },{
@@ -65,11 +64,7 @@ export default StackNavigator({
     // header: null,
     headerBackTitle: null,
     headerTintColor: '#000000',
-    headerStyle: {
-      elevation: 0,
-      backgroundColor: '#fff',
-      ...(_g.os === 'android'? _g.androidFixNavStyle : {})
-    },
+    headerStyle: _g.headerStyle,
     headerTitleStyle:{
       alignSelf: 'center'
       // display: 'flex',

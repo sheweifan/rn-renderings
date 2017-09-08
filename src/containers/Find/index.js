@@ -40,8 +40,8 @@ class Find extends React.Component {
       return <Image
           source={focused?icon_find_active:icon_find}
           style={[{
-            height: 28,
-            width: 28,
+            height: 25,
+            width: 25,
             resizeMode: 'contain'
           }]}
       />

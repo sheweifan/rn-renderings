@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // import Imgs from '../../components/Imgs';
 import Tab from '../../components/Tab';
 import FillterBar from '../../components/FillterBar';
+import FillterMenu from '../../components/FillterMenu';
 
 import icon_index from '../../static/images/nav/icon_index.png'
 import icon_index_active from '../../static/images/nav/icon_index_active.png'
@@ -52,7 +53,6 @@ const FillterOpts= {
 
 class MapList extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
-    console.log('navigation1111',navigation)
     const { params } = navigation.state;
     return {
       headerTitle:  <Tab 
@@ -71,12 +71,13 @@ class MapList extends React.Component {
     super(props);
     this.state= {
       tabActive: 0,
-      fillterActive: null
+      fillterActive: null,
+      fillterMenuHidden: true
     }
   }
   render() {
     const { navigate } = this.props.navigation;
-    const { tabActive,fillterActive } = this.state;
+    const { tabActive,fillterActive,fillterMenuHidden } = this.state;
     return (
       <View style={styles.container}>
         <FillterBar 
@@ -93,19 +94,27 @@ class MapList extends React.Component {
             }
           </Text>
         </ScrollView>
+        <FillterMenu
+          hidden={fillterMenuHidden}
+          data={new Array(fillterActive*10 || 10).fill('啊啊啊')}
+        />
       </View>
       );
   }
   fillterChange(fillterActive){
+
     this.setState({
-      fillterActive
+      fillterActive,
+      fillterMenuHidden: fillterActive == null,
     })
   }
   tabChange(tabActive){
     // console.log(tabActive);
     this.setState({
-      tabActive
-    })
+      tabActive,
+    });
+
+
   }
   componentDidMount(){
     this.props.navigation.setParams({
