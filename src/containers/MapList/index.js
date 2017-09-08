@@ -63,7 +63,7 @@ class MapList extends React.Component {
       headerStyle: {
         backgroundColor: '#fff',
         ...(params ? params.headerStyle: {} ),
-        ...(_g.os === 'android'? {paddingRight: 50, ..._g.androidFixNavStyle} : {})
+        ...(_g.os === 'android'? {paddingRight: 50, ..._g.headerStyle} : {})
       },
     }
   };

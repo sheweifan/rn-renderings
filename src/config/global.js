@@ -9,11 +9,10 @@ const androidFixNavStyle = {
 	borderBottomColor: '#e5e5e5'
 }
 const headerStyle ={
-  // elevation: 0,
+  elevation: 0,
   backgroundColor: '#fff',
   ...(OS === 'android'? androidFixNavStyle : {}),
 
-	elevation: 0,
 }
 
 export default {

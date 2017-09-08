@@ -54,8 +54,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  Search: { screen: Search },
   Home: { screen: MainScreenNavigator },
+  Search: { screen: Search },
   MapList: { screen: MapList },
   Detail: { screen: Detail },
 },{
