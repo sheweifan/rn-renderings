@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     shadowColor:'black', 
     shadowOpacity: 0.2, 
     shadowRadius: 5,
-    elevation: 5,
+    elevation: 3,
     // borderWidth: 1,
     // borderColor: '#e5e5e5'
   },

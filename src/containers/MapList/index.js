@@ -102,7 +102,7 @@ class MapList extends React.Component {
       );
   }
   fillterChange(fillterActive){
-
+    console.log('fillterActive',fillterActive)
     this.setState({
       fillterActive,
       fillterMenuHidden: fillterActive == null,
@@ -113,7 +113,6 @@ class MapList extends React.Component {
     this.setState({
       tabActive,
     });
-
 
   }
   componentDidMount(){

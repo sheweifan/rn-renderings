@@ -88,6 +88,7 @@ class FillterMenu extends React.Component{
     //     // easing: Easing.linear
     //   }
     // ).start()
+   
   }
   componentWillReceiveProps(nextProps){
     const {hidden} = nextProps;
