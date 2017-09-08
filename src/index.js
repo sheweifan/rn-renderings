@@ -54,9 +54,9 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  MapList: { screen: MapList },
-  Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
+  Home: { screen: MainScreenNavigator },
+  MapList: { screen: MapList },
   Detail: { screen: Detail },
 },{
   gesturesEnabled: false, // 是否允许右滑返回，在iOS上默认为true，在Android上默认为false

@@ -96,7 +96,7 @@ class MapList extends React.Component {
         </ScrollView>
         <FillterMenu
           hidden={fillterMenuHidden}
-          data={new Array(fillterActive*10 || 10).fill('啊啊啊')}
+          data={new Array(fillterActive*10 || 5).fill('啊啊啊')}
         />
       </View>
       );

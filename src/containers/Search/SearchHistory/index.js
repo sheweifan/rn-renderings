@@ -45,7 +45,7 @@ class SearchHistory extends React.Component{
     AsyncStorage.setItem('fuck','fuck')
     AsyncStorage.getItem('fuck')
       .then((data)=>{
-        console.log(data);
+        // console.log(data);
       })
   }
 }
