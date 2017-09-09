@@ -36,7 +36,7 @@ class FillterBar extends React.Component{
                       {
                         rotate: fillterAnimate[i].interpolate({
                           inputRange: [0, 1],
-                          outputRange: ['0deg', '180deg'],
+                          outputRange: ['180deg','0deg' ],
                         }),
                       } 
                     ]
@@ -61,10 +61,10 @@ class FillterBar extends React.Component{
     const _idx = (idx === active? null:idx);
     fillterChange(_idx)
   }
-  componentDidUpdate(prevProps,prevState){
+  componentWillReceiveProps(nextProps){
 
     const { fillterAnimate, props } = this;
-    const { items,active,fillterChange } = props;
+    const { active } = nextProps;
     for(let i in fillterAnimate){
       Animated.timing(
         fillterAnimate[i],{
