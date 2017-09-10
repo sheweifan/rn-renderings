@@ -28,9 +28,6 @@ class FreeDisign extends React.Component {
         <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
         <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
         <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
       </ScrollView>
       );
   }

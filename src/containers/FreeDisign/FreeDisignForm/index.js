@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Picker, Modal, Toast } from 'antd-mobile';
 const {height, width} = Dimensions.get('window');
 
 // const FormInput = ({placeholder}) => (
@@ -8,6 +9,56 @@ const {height, width} = Dimensions.get('window');
 // const FormInput = ({placeholder}) => (
 //   <TextInput style={styles.formItem} placeholder={placeholder}/>
 // )
+const seasons = [
+  [
+    {
+      label: '2013',
+      value: '2013',
+    },
+    {
+      label: '2014',
+      value: '2014',
+    },
+  ],
+  [
+    {
+      label: '春',
+      value: '春',
+    },
+    {
+      label: '夏',
+      value: '夏',
+    },
+  ],
+];
+
+const CityChose = (props)=> {
+  // console.log('propspropspropsprops',props);
+  return (<TouchableOpacity 
+      onPress={props.onClick}
+      style={[styles.formItem,styles.selectItem]}
+    >
+      <Text
+        style={styles.formItemText}
+      >
+        {
+          props.extra || '请选择城市'
+        }
+      </Text>
+      {
+        // <TextInput 
+        //   style={styles.formItemText}
+        //   placeholderTextColor={'#666'} 
+        //   editable={false} 
+        //   placeholder={}
+        //   underlineColorAndroid="transparent"
+        //   value={props.extra}
+        // />
+      }
+      <Icon name="ios-arrow-forward" size={16} color={'#999'} style={styles.selectItemIcon}/>
+    </TouchableOpacity>
+  )
+}
 
 class FreeDisignForm extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
@@ -18,6 +69,9 @@ class FreeDisignForm extends React.Component {
   };
   constructor(props){
     super(props);
+    this.state= {
+      sValue: ['2013', '春'],
+    }
   }
   render() {
     return (
@@ -26,17 +80,19 @@ class FreeDisignForm extends React.Component {
           <Text style={styles.freeDisignFormTitle}>
             全国已有<Text style={styles.freeDisignFormTitleCount}>88440</Text>位业主获得0元设计
           </Text>
-
-          <View style={[styles.formItem,styles.selectItem]}>
-            <TextInput 
-              style={styles.formItemText}
-              placeholderTextColor={'#666'} 
-              editable={false} 
-              placeholder={'请选择城市'}
-              underlineColorAndroid="transparent"
-            />
-            <Icon name="ios-arrow-forward" size={16} color={'#999'} style={styles.selectItemIcon}/>
-          </View>
+          <Picker 
+            data={seasons}
+            title="选择季节"
+            cascade={false}
+            extra="请选择(可选)"
+            value={this.state.sValue}
+            onChange={v => {
+              // console.log(v)
+              this.setState({ sValue: v })
+            }}
+          >
+            <CityChose />
+          </Picker>
           <View style={styles.formItem}>
             <TextInput 
               style={styles.formItemText}
@@ -63,9 +119,11 @@ class FreeDisignForm extends React.Component {
 
         </View>
 
-
       </View>
     );
+  }
+  componentDidMount(){
+    Toast.info('fuck', 1)
   }
 }
 
@@ -114,6 +172,7 @@ const styles = StyleSheet.create({
     marginBottom: padding,
   },
   formItemText: {
+    backgroundColor: 'transparent',
     padding: 18,
     fontSize: 13,
     lineHeight: 18,
