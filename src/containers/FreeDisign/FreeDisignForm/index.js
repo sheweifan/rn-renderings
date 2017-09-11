@@ -4,45 +4,27 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Picker, Modal, Toast } from 'antd-mobile';
 const {height, width} = Dimensions.get('window');
 
+import {GetProvinceAndCity_get} from '../../../api/api'
+
+import CityPicker from '../../../components/CityPicker';
+
 // const FormInput = ({placeholder}) => (
 // )
 // const FormInput = ({placeholder}) => (
 //   <TextInput style={styles.formItem} placeholder={placeholder}/>
 // )
-const seasons = [
-  [
-    {
-      label: '2013',
-      value: '2013',
-    },
-    {
-      label: '2014',
-      value: '2014',
-    },
-  ],
-  [
-    {
-      label: '春',
-      value: '春',
-    },
-    {
-      label: '夏',
-      value: '夏',
-    },
-  ],
-];
 
-const CityChose = (props)=> {
+const CityChose = ({extra='请选择城市',onClick})=> {
   // console.log('propspropspropsprops',props);
   return (<TouchableOpacity 
-      onPress={props.onClick}
+      onPress={onClick}
       style={[styles.formItem,styles.selectItem]}
     >
       <Text
         style={styles.formItemText}
       >
         {
-          props.extra || '请选择城市'
+          extra
         }
       </Text>
       {
@@ -80,19 +62,9 @@ class FreeDisignForm extends React.Component {
           <Text style={styles.freeDisignFormTitle}>
             全国已有<Text style={styles.freeDisignFormTitleCount}>88440</Text>位业主获得0元设计
           </Text>
-          <Picker 
-            data={seasons}
-            title="选择季节"
-            cascade={false}
-            extra="请选择(可选)"
-            value={this.state.sValue}
-            onChange={v => {
-              // console.log(v)
-              this.setState({ sValue: v })
-            }}
-          >
+          <CityPicker>
             <CityChose />
-          </Picker>
+          </CityPicker>
           <View style={styles.formItem}>
             <TextInput 
               style={styles.formItemText}
@@ -122,8 +94,10 @@ class FreeDisignForm extends React.Component {
       </View>
     );
   }
-  componentDidMount(){
+  async componentDidMount(){
     // Toast.info('fuck', 1)
+    const data = await GetProvinceAndCity_get()
+    console.log(data)
   }
 }
 
