@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView,KeyboardAvoidingView } from 'react-native';
 // import Img from '../../components/Img';
 import FreeDisignForm from './FreeDisignForm';
 import _g from '../../config/global.js';
@@ -18,17 +18,21 @@ class FreeDisign extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ScrollView style={styles.container}>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <FreeDisignForm />
+        <KeyboardAvoidingView
+          behavior="position"
+        >
+          <ScrollView style={styles.container}>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <FreeDisignForm />
 
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-        <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
-      </ScrollView>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+              <Image style={styles.banner} source={{uri: 'http://dummyimage.com/750x320/ee735c'}}/>
+          </ScrollView>
+        </KeyboardAvoidingView>
       );
   }
 }
@@ -38,9 +42,13 @@ const inputH = 60;
 // const bannerH = width*500/750;
 const bannerH = width*320/750;
 const styles = StyleSheet.create({
+  // fixKeyboardContainer:{
+  //   flex: 1,
+  //   display: 'flex'
+  // },
   container: {
     backgroundColor: '#eff0f5',
-    flex: 1
+    // flex: 1
   },
   banner: {
     height: bannerH

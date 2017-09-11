@@ -123,7 +123,7 @@ class FreeDisignForm extends React.Component {
     );
   }
   componentDidMount(){
-    Toast.info('fuck', 1)
+    // Toast.info('fuck', 1)
   }
 }
 
