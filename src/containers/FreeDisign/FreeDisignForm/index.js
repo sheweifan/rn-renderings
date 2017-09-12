@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Picker, Modal, Toast } from 'antd-mobile';
 const {height, width} = Dimensions.get('window');
 
-import {GetProvinceAndCity_get} from '../../../api/api'
 
 import CityPicker from '../../../components/CityPicker';
 
@@ -94,11 +93,11 @@ class FreeDisignForm extends React.Component {
       </View>
     );
   }
-  async componentDidMount(){
-    // Toast.info('fuck', 1)
-    const data = await GetProvinceAndCity_get()
-    console.log(data)
-  }
+  // async componentDidMount(){
+  //   // Toast.info('fuck', 1)
+  //   const data = await GetProvinceAndCity_get()
+  //   console.log(data)
+  // }
 }
 
 const padding = 12;
