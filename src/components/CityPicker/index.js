@@ -28,26 +28,37 @@ class CityPicker extends React.Component {
     return (
 
      <Picker 
-       data={cityData}
-       title="选择季节"
-       cascade={true}
-       extra="请选择(可选)"
-       cols={2}
-       value={this.state.sValue}
-       onChange={v => {
-         // console.log(v)
-         this.setState({ sValue: v })
-       }}
-       { ...this.props }
-     >
+        data={cityData}
+        title="选择城市"
+        cascade={true}
+        extra="选择城市"
+        cols={2}
+        format={(values)=>{
+          // console.log(values)
+          return values.join('')
+        }}
+        value={this.state.sValue}
+        onChange={v => {
+          this.setState({ sValue: v })
+        }}
+        { ...this.props }
+      >
       {
         children
       }
-     </Picker>
+    </Picker>
     )
   }
 
   async componentDidMount(){
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        console.log(position)
+      },
+      (error) => {},
+      {enableHighAccuracy: true, timeout: 100000, maximumAge: 1000}
+    );
     try{
       const {Data} = await GetProvinceAndCity_get()
       const parseData = Data.map(
@@ -69,6 +80,7 @@ class CityPicker extends React.Component {
     }catch(e){
       console.log(e);
     }
+    
   }
 }
 
