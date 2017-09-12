@@ -88,16 +88,13 @@ class CityPicker extends React.Component {
       const value = [];
       const parseData = cityData.map(
         ({Code,Name,City})=>{
-          if(path[2].match(Name)){
-            value[0] = Code;
-          }
           return {
             "value": Code,
             "label": Name,
             "children": City.map(
               (citem)=>{
                 if(name.match(citem.Name)){
-                  value[1] = citem.Code;
+                  value = [Code,citem.Code];
                 }
                 return {
                   "value": citem.Code,

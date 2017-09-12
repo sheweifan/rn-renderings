@@ -51,7 +51,6 @@ class FreeDisignForm extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      sValue: ['2013', '春'],
     }
   }
   render() {
@@ -70,6 +69,8 @@ class FreeDisignForm extends React.Component {
               placeholderTextColor={'#666'} 
               placeholder={'请输入手机号码'}
               underlineColorAndroid="transparent"
+              keyboardType="numeric"
+              maxLength={11}
             />
           </View>
           <View style={[styles.formItem,styles.codeItem]}>
@@ -78,6 +79,8 @@ class FreeDisignForm extends React.Component {
               placeholderTextColor={'#666'} 
               placeholder={'验证码'}
               underlineColorAndroid="transparent"
+              keyboardType="numeric"
+              maxLength={4}
             />
             <TouchableOpacity style={[styles.formItem,styles.formBtn,styles.codeItemBtn]}>
               <Text style={[styles.formItemText,styles.formBtnText,styles.formCodeBtnText]}>获取验证码</Text>
