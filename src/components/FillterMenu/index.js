@@ -22,15 +22,18 @@ class FillterMenu extends React.Component{
   render(){
     const { hidden } = this.state;
     // console.log(9999999,typeof )
-    if(hidden){
-      return null
-    }
+    // if(hidden){
+    //   return null
+    // }
 
     const { style,data } = this.props;
     return (
       <View style={[
           styles.fillterMenu,
           style,
+          {
+            left: hidden? 9999: 0
+          }
         ]}
       >
         <Animated.View 
@@ -92,24 +95,38 @@ class FillterMenu extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     const {hidden} = nextProps;
-    if(!hidden){
+    // if(!hidden){
         this.setState({
           hidden
+        },()=>{
+          Animated.timing(
+            this.menuAnimate,{
+              toValue: hidden?0:1,
+              duration: 500,
+              // easing: Easing.linear
+            }
+          ).start(()=>{
+            // if(hidden){
+            //   this.setState({
+            //     hidden
+            //   })
+            // }
+          })   
         })
-    }
-    Animated.timing(
-      this.menuAnimate,{
-        toValue: hidden?0:1,
-        duration: 500,
-        // easing: Easing.linear
-      }
-    ).start(()=>{
-      if(hidden){
-        this.setState({
-          hidden
-        })
-      }
-    })
+    // }
+    // Animated.timing(
+    //   this.menuAnimate,{
+    //     toValue: hidden?0:1,
+    //     duration: 500,
+    //     // easing: Easing.linear
+    //   }
+    // ).start(()=>{
+    //   // if(hidden){
+    //   //   this.setState({
+    //   //     hidden
+    //   //   })
+    //   // }
+    // })
   }
 }
 const padding = 12;

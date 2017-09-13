@@ -102,7 +102,7 @@ class MapList extends React.Component {
       );
   }
   fillterChange(fillterActive){
-    console.log('fillterActive',fillterActive)
+    // console.log('fillterActive',fillterActive)
     this.setState({
       fillterActive,
       fillterMenuHidden: fillterActive == null,
@@ -110,9 +110,18 @@ class MapList extends React.Component {
   }
   tabChange(tabActive){
     // console.log(tabActive);
-    this.setState({
-      tabActive,
-    });
+
+    if(tabActive !== this.state.tabActive){
+      this.setState({
+        tabActive,
+      });
+      this.props.navigation.setParams({
+        tabActive: tabActive
+      })
+    }
+    // if(tabActive !== this.state.tabActive){
+      
+    // }
 
   }
   componentDidMount(){
@@ -125,11 +134,11 @@ class MapList extends React.Component {
     })
   }
   componentDidUpdate(prevProps,{tabActive}){
-    if(tabActive !== this.state.tabActive){
-      this.props.navigation.setParams({
-        tabActive: this.state.tabActive
-      })
-    }
+    // if(tabActive !== this.state.tabActive){
+    //   this.props.navigation.setParams({
+    //     tabActive: this.state.tabActive
+    //   })
+    // }
   }
 }
 
