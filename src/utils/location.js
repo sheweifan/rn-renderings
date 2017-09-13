@@ -1,4 +1,6 @@
 
+import { Location, Permissions } from 'expo';
+
 // import {GetCityMes_get} from '../api/api/my';
 
         // var initialPosition = JSON.stringify(position);
@@ -14,18 +16,38 @@
         // "mocked": false,
         // "timestamp": 1505200643941,
 const getLocation = () =>{
+
   return new Promise((res,rej)=>{
-    navigator.geolocation.getCurrentPosition((position) => {
-        res(position);
-      },(error) => {
-        console.log('getLocation error',error)
-        rej(error);
-      },{
-        enableHighAccuracy: true, 
-        timeout: 2000, 
-        maximumAge: 1000
-      }
-    );
+    // 安卓闪退，试用expo sdk..
+    // console.log(navigator.geolocation)
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //     res(position);
+    //   },(error) => {
+    //     // console.log('getLocation error',error)
+    //     rej(error);
+    //   },{
+    //     enableHighAccuracy: true, 
+    //     timeout: 2000, 
+    //     maximumAge: 1000
+    //   }
+    // );
+    Permissions.askAsync(Permissions.LOCATION)
+      .then(({ status })=>{
+        if (status === 'granted') {
+          Location.getCurrentPositionAsync({
+            enableHighAccuracy: true
+          })
+            .then(location=>{
+              console.log(location);
+              res(location);
+            })
+            .catch(e=>rej(e))
+        }else{
+          rej(e);
+        }
+      })
+      .catch(e=>rej(e))
+
   })
 };
 
