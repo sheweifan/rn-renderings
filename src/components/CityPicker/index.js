@@ -77,7 +77,6 @@ class CityPicker extends React.Component {
       };
 
       cityMes = await GetCityMes_get(opts);
-
     }catch(e){
       console.log(e);
     }
@@ -85,8 +84,9 @@ class CityPicker extends React.Component {
 
     if(cityData){
       const _cityMes = cityMes || { results:[{name:'',path:',,,'}] }
-      const name = _cityMes.results[0].name;
+      // const name = _cityMes.results[0].name;
       const path = _cityMes.results[0].path.split(',');
+      const name = path[1];
       const value = [];
       const parseData = cityData.map(
         ({Code,Name,City})=>{
