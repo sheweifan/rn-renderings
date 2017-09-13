@@ -43,14 +43,17 @@ class Index extends React.Component {
           <TouchableOpacity 
             activeOpacity={1}
             style={styles.search}
-            onPress={()=>this.props.navigation.navigate('Search')}
+            onPress={()=>navigate('Search')}
           >
             <Icon name="ios-search" size={28} style={styles.searchIcon} color='#333'/>
             <Text style={styles.searchInput}>搜索</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.topLinks}>
-          <TouchableOpacity style={[styles.topLink]}>
+          <TouchableOpacity 
+            style={[styles.topLink]}
+            onPress={()=>navigate('FreeDisign')}
+          >
             <LinearGradient
               colors={['#1263d5', '#04dbec']}
               style={[styles.topLink]}
