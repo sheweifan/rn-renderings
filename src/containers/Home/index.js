@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView,TouchableOpacity } from 'react-native';
+
+import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Img from '../../components/Img';
 import Imgs from '../../components/Imgs';
@@ -37,6 +39,7 @@ class Index extends React.Component {
         <View style={styles.banner}>
           <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
           </Image>
+
           <TouchableOpacity 
             activeOpacity={1}
             style={styles.search}
@@ -47,9 +50,31 @@ class Index extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.topLinks}>
-          <View style={[styles.topLink,styles.topLink1]}><Text style={styles.topLinkText}>0元设计</Text></View>
-          <View style={[styles.topLink,styles.topLink2]}><Text style={styles.topLinkText}>设计师</Text></View>
+          <TouchableOpacity style={[styles.topLink]}>
+            <LinearGradient
+              colors={['#1263d5', '#04dbec']}
+              style={[styles.topLink]}
+              start={[0,0.5]}
+              end={[1,0.5]}
+            >
+              <Text style={styles.topLinkText}>0元设计</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.topLink]}>
+            <LinearGradient
+              colors={['#3c3bb4', '#b761c7']}
+              style={[styles.topLink]}
+              start={[0,0.5]}
+              end={[1,0.5]}
+            >
+              <Text style={styles.topLinkText}>设计师</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+          
         </View>
+
+        
         <Imgs />
       </ScrollView>
       );
@@ -243,17 +268,18 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 55,
     width: (width)*0.5-padding*1.5,
-    backgroundColor: '#e5e5e5'
+    // backgroundColor: '#e5e5e5'
   },
-  topLink1: {
-    backgroundColor: '#0aa5e2'
-  },
-  topLink2: {
-    backgroundColor: '#8351bf'
-  },
+  // topLink1: {
+  //   backgroundColor: '#0aa5e2'
+  // },
+  // topLink2: {
+  //   backgroundColor: '#8351bf'
+  // },
   topLinkText: {
     fontSize: 14,
-    color: '#fff'
+    color: '#fff',
+    backgroundColor: 'transparent'
   },
   // linearGradient: {
   //   flex: 1,
