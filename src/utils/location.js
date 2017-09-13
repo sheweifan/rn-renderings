@@ -38,7 +38,7 @@ const getLocation = () =>{
             enableHighAccuracy: true
           })
             .then(location=>{
-              console.log(location);
+              // console.log(location);
               res(location);
             })
             .catch(e=>rej(e))
