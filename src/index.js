@@ -35,7 +35,7 @@ const MainScreenNavigator = TabNavigator(
         backgroundColor: '#fff', // TabBar 背景色
         borderTopWidth: 1,
         borderTopColor: '#ececec',
-        paddingBottom: 0,
+        paddingBottom: _g.os === 'android'? 0 : 3,
         paddingTop: 0,
         // height: 50
       },
