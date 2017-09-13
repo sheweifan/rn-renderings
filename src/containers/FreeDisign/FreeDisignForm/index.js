@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Picker, Modal, Toast } from 'antd-mobile';
+import { Toast, ActivityIndicator, Modal } from 'antd-mobile';
+
+import {DesignQuotation_post} from '../../../api/api'
 const {height, width} = Dimensions.get('window');
+
 
 
 import CityPicker from '../../../components/CityPicker';
@@ -12,6 +15,13 @@ import CityPicker from '../../../components/CityPicker';
 // const FormInput = ({placeholder}) => (
 //   <TextInput style={styles.formItem} placeholder={placeholder}/>
 // )
+// 
+const initTime = 10;
+const phonenumErrorInfoTips = '请输入正确的手机号码';
+
+
+
+const infoTipsModal = (info) => Toast.info(info, 0.8);
 
 const CityChose = ({extra='请选择城市',onClick})=> {
   // console.log('propspropspropsprops',props);
@@ -51,16 +61,26 @@ class FreeDisignForm extends React.Component {
   constructor(props){
     super(props);
     this.state= {
+      phonenum: '',
+      phonenumError: true,
+      verifyCode: '',
+      loadingInfo: '',
+      codeTime: initTime
     }
   }
   render() {
+    const { phonenum, verifyCode , phonenumError, loadingInfo, codeTime } = this.state;
     return (
       <View style={styles.freeDisignForm}>
         <View style={styles.freeDisignFormInner}>
           <Text style={styles.freeDisignFormTitle}>
             全国已有<Text style={styles.freeDisignFormTitleCount}>88440</Text>位业主获得0元设计
           </Text>
-          <CityPicker>
+          <CityPicker 
+            onChange={e=>{
+              this.CitySelected = e;
+            }}
+          >
             <CityChose />
           </CityPicker>
           <View style={styles.formItem}>
@@ -71,9 +91,28 @@ class FreeDisignForm extends React.Component {
               underlineColorAndroid="transparent"
               keyboardType="numeric"
               maxLength={11}
+              value={phonenum}
+              onChangeText={(phonenum) => this.setState({phonenum},this.phonenumVerify.bind(this))}
+              // onBlur={this.phonenumVerify.bind(this)}
             />
+            {
+              (!phonenumError || phonenum === '')
+              ? null
+              : <Icon 
+                  name="md-alert" 
+                  size={28} 
+                  style={styles.phonenumErrorIcon}
+                  onPress={()=>infoTipsModal(phonenumErrorInfoTips)}
+                />
+            }
+            
           </View>
-          <View style={[styles.formItem,styles.codeItem]}>
+          <View 
+            style={[
+              styles.formItem,
+              styles.codeItem
+            ]}
+          >
             <TextInput 
               style={[styles.formItemText,styles.codeItemText]}
               placeholderTextColor={'#666'} 
@@ -81,26 +120,183 @@ class FreeDisignForm extends React.Component {
               underlineColorAndroid="transparent"
               keyboardType="numeric"
               maxLength={4}
+              value={verifyCode}
+              onChangeText={(verifyCode) => this.setState({verifyCode})}
             />
-            <TouchableOpacity style={[styles.formItem,styles.formBtn,styles.codeItemBtn]}>
-              <Text style={[styles.formItemText,styles.formBtnText,styles.formCodeBtnText]}>获取验证码</Text>
+            <TouchableOpacity
+              // disabled={phonenumError}
+              style={[
+                styles.formBtn,
+                styles.codeItemBtn,
+                phonenumError ? styles.formItemDisabled : {}
+              ]}
+              onPress={this.setCode.bind(this)}
+            >
+              <Text style={[styles.formItemText,styles.formBtnText,styles.formCodeBtnText]}>
+                {
+                  this.codeInterval
+                  ? codeTime + 's'
+                  : '获取验证码'
+                
+                }
+
+              </Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={[styles.formItem,styles.formBtn]}>
+          <TouchableOpacity 
+            onPress={this.submit.bind(this)}
+            style={[
+              styles.formItem,
+              styles.formBtn,
+              !phonenumError && verifyCode.length === 4 ? {} :styles.formItemDisabled
+            ]}
+          >
             <Text style={[styles.formItemText,styles.formBtnText]}>抢先预约</Text>
           </TouchableOpacity>
 
-        </View>
+          {
+            loadingInfo === ''
+            ? null
+            : <ActivityIndicator toast text={loadingInfo} />
+          }
 
+        </View>
+        
       </View>
     );
   }
-  // async componentDidMount(){
-  //   // Toast.info('fuck', 1)
-  //   const data = await GetProvinceAndCity_get()
-  //   console.log(data)
+  // textChange(type,e){
+  //   console.log(e);
+  //   this.setState({
+  //     [type]:e
+  //   })
   // }
+  
+  phonenumVerify(){
+    const {phonenum} = this.state;
+
+    const phonenumError = !/^0?1[3|4|5|7|8][0-9]\d{8}$/.test(phonenum);
+    // console.log(verified);
+    this.setState({
+      phonenumError
+    })
+
+    return phonenumError;
+  }
+
+  // codeInterval(){
+  //   const fn = ()=>{
+  //     this.codeTime = (this.codeTime || 60) - 1;
+
+  //   }
+
+
+  // }
+
+  setCode(){
+
+    const {phonenumError} = this.state;
+
+    if(phonenumError){
+      infoTipsModal(phonenumErrorInfoTips);
+      return;
+    }
+
+    if(this.codeInterval){
+      return;
+    }
+
+    this.setState({
+      loadingInfo: '正在发送...'
+    })
+
+    setTimeout(()=>{
+
+      this.setState({
+        loadingInfo: ''
+      })
+
+      alert('假装收到短信验证码5588');
+
+
+      const fn = ()=>{
+        let _codeTime = this.state.codeTime - 1;
+        // console.log(_codeTime)
+        if(_codeTime === 0){
+          _codeTime = initTime;
+          clearInterval(this.codeInterval);
+          this.codeInterval = null;
+        }
+        this.setState({
+          codeTime: _codeTime
+        }); 
+
+      }
+      this.codeInterval = setInterval(fn,1000)
+
+
+    },1000)
+
+  }
+
+  submit(){
+    const CitySelected = this.CitySelected;
+    const {phonenum, verifyCode, phonenumError } = this.state;
+
+    if(phonenum === '' || phonenumError){
+      infoTipsModal(phonenumErrorInfoTips);
+      return;
+    }
+
+    if(!CitySelected){
+      infoTipsModal('请选择城市');
+      return;
+    }
+
+    if(verifyCode.length !== 4){
+      infoTipsModal('请输入验证码');
+      return;
+    }
+    const opts = {
+      IsSendSms: true,// 成功后是否发送手机短信
+      quoteTel: phonenum,// 手机号
+      quoteCode: verifyCode,// 短信验证码
+      cityId: CitySelected[1],// 城市ID
+    }
+    // `IsSendSms=${opts.IsSendSms}&cityId=${opts.cityId}&quoteCode=${opts.quoteCode}&quoteTel=${opts.quoteTel}`
+    DesignQuotation_post({
+      data: opts
+    })
+     .then(({Success})=>{
+        if(Success){
+          Toast.success('报名成功，请留意短信',1.5);
+
+          this.setState({
+            phonenum: '',
+            phonenumError: true,
+            verifyCode: '',
+          })
+        }else{
+          // Modal.alert(
+          //   '提交失败，请稍后重试', 
+          //   <Text style={{textAlign: 'center',display: 'flex',padding: 20}}>提交失败，请稍后重试</Text>, 
+          //   [{ text: '确定'},]
+          // )
+          Modal.alert(
+            '提交失败，请稍后重试', 
+            '', 
+            [{ text: '确定'},]
+          )
+        }
+
+      // console.log(data,opts);
+     })
+    // console.log('verified',CitySelected,verifyCode,phonenum)
+    // console.log(this.CitySelected);
+    // if()
+
+  }
 }
 
 const padding = 12;
@@ -146,6 +342,11 @@ const styles = StyleSheet.create({
     borderRadius: formItemH/2,
     borderColor: '#e6e6e6',
     marginBottom: padding,
+
+
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   formItemText: {
     backgroundColor: 'transparent',
@@ -153,6 +354,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     height: formItemH,
+
+    flex: 1
   },
   selectItem: {
     position: 'relative',
@@ -174,14 +377,14 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  codeItem: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  codeItemText: {
-    flex: 1
-  },
+  // codeItem: {
+  //   display: 'flex',
+  //   flexDirection: 'row',
+  //   alignItems: 'center'
+  // },
+  // codeItemText: {
+  //   flex: 1
+  // },
   codeItemBtn: {
     marginRight: padding,
     marginLeft: padding,
@@ -192,8 +395,17 @@ const styles = StyleSheet.create({
   formCodeBtnText: {
     paddingTop: 8,
     paddingBottom: 0,
-  }
 
+  },
+  phonenumErrorIcon: {
+    marginRight: padding,
+    marginLeft: padding,
+  },
+
+  formItemDisabled: {
+    // opacity: 0.8
+    backgroundColor: '#666'
+  }
 });
 
 export default FreeDisignForm;

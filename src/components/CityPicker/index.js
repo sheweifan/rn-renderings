@@ -18,8 +18,8 @@ class CityPicker extends React.Component {
   }
 
   render(){
-    const {children} = this.props;
-    const {cityData} = this.state;
+    const {children, onChange} = this.props;
+    const {cityData, sValue} = this.state;
     // console.log('render',cityData)
     if(cityData == null){
       return React.cloneElement(children, {
@@ -39,14 +39,16 @@ class CityPicker extends React.Component {
         cols={2}
         format={(values)=>{
           // console.log(values)
+          // 
           return values.join('')
         }}
-        value={this.state.sValue}
+        value={sValue}
+        { ...this.props }
         onChange={v => {
           // console.log(v);
           this.setState({ sValue: v })
+          // onChange && onChange(v);
         }}
-        { ...this.props }
       >
       {
         children
@@ -110,6 +112,14 @@ class CityPicker extends React.Component {
         sValue: value.length === 2 ? value : null
       })
 
+    }
+
+  }
+  componentDidUpdate(prevProps, prevState){
+    const {sValue} =  this.state;
+    const {onChange} =  this.props;
+    if(prevState.sValue !== sValue){
+      onChange && onChange(sValue);
     }
 
   }
