@@ -35,7 +35,7 @@ const getLocation = () =>{
       .then(({ status })=>{
         if (status === 'granted') {
           Location.getCurrentPositionAsync({
-            enableHighAccuracy: true
+            // enableHighAccuracy: true
           })
             .then(location=>{
               // console.log(location);
