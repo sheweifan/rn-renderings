@@ -47,6 +47,12 @@ class Find extends React.Component {
       />
     },
     headerTitle: '发现',
+    headerTitleStyle:{
+      alignSelf: 'center'
+      // display: 'flex',
+      // justifyContent: 'center',
+      // alignItems: 'center'
+    },
     // header: null
   };
   goMap(){

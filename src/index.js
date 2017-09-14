@@ -67,12 +67,12 @@ export default StackNavigator({
     headerBackTitle: null,
     headerTintColor: '#000000',
     headerStyle: _g.headerStyle,
-    headerTitleStyle:{
-      alignSelf: 'center'
-      // display: 'flex',
-      // justifyContent: 'center',
-      // alignItems: 'center'
-    },
+    // headerTitleStyle:{
+    //   alignSelf: 'center'
+    //   // display: 'flex',
+    //   // justifyContent: 'center',
+    //   // alignItems: 'center'
+    // },
   }
 });
 

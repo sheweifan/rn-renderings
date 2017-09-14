@@ -65,6 +65,12 @@ class MapList extends React.Component {
         ...(params ? params.headerStyle: {} ),
         ...(_g.os === 'android'? {paddingRight: 50, ..._g.headerStyle} : {})
       },
+      headerTitleStyle:{
+        alignSelf: 'center'
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center'
+      },
     }
   };
   constructor(props){
