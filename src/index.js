@@ -57,9 +57,9 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  DesignerList: { screen: DesignerList },
-  Home: { screen: MainScreenNavigator },
   FreeDisign: { screen: FreeDisign },
+  Home: { screen: MainScreenNavigator },
+  DesignerList: { screen: DesignerList },
   Search: { screen: Search },
   MapList: { screen: MapList },
   Detail: { screen: Detail },
