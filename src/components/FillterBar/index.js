@@ -57,9 +57,9 @@ class FillterBar extends React.Component{
     </View>)
   }
   fillterChange(idx){
-    const { items,active,fillterChange } = this.props;
+    const { items,active,onChange } = this.props;
     const _idx = (idx === active? null:idx);
-    fillterChange(_idx)
+    onChange(_idx)
   }
   componentWillReceiveProps(nextProps){
 
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ececec',
     borderBottomWidth: 1,
     height: 45,
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: '#fff'
   },
   fillterBarItem: {
     flex: 1,
