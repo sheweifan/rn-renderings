@@ -89,7 +89,7 @@ class MapList extends React.Component {
         <FillterBar 
           {...FillterOpts}
           active={fillterActive}
-          fillterChange={this.fillterChange.bind(this)}
+          onChange={this.fillterChange.bind(this)}
         />
         <ScrollView>
           <Text>

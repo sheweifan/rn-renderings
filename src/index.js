@@ -10,7 +10,7 @@ import Detail from './containers/Detail';
 import Search from './containers/Search';
 import MapList from './containers/MapList';
 import FreeDisign from './containers/FreeDisign';
-import Designer from './containers/Designer';
+import DesignerList from './containers/DesignerList';
 
 import icon_index from './static/images/nav/icon_index.png'
 import icon_index_active from './static/images/nav/icon_index_active.png'
@@ -22,6 +22,7 @@ const MainScreenNavigator = TabNavigator(
   }, 
   {
     animationEnabled: false, // 切换页面时不显示动画
+    lazy: true, // 是否懒加载
     tabBarPosition: 'bottom', // 显示在底端，android 默认是显示在页面顶端的
     swipeEnabled: false, // 禁止左右滑动
     backBehavior: 'none', // 按 back 键是否跳转到第一个 Tab， none 为不跳转
@@ -56,7 +57,7 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  Designer: { screen: Designer },
+  DesignerList: { screen: DesignerList },
   Home: { screen: MainScreenNavigator },
   FreeDisign: { screen: FreeDisign },
   Search: { screen: Search },
