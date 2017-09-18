@@ -4,12 +4,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import FillterBar from '../../components/FillterBar';
 import Designer from '../../components/Designer';
+import CityPicker from '../../components/CityPicker';
 const {width, height} = Dimensions.get('window');
 
 const items = [
   {
     id: 1,
-    text: '全国',
+    text: (
+       <CityPicker>
+        <View></View>
+        </CityPicker>
+    )
   },
   {
     id: 2,
@@ -27,12 +32,14 @@ class DesignerList extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      fillterActive: null
+      fillterActive: null,
+      cityPickerVisible: true
     }
   }
  
   render(){
-    const {fillterActive} = this.state;
+    const {fillterActive, cityPickerVisible} = this.state;
+    console.log(cityPickerVisible)
     return (
       <View Style={styles.detailContainer}>
         <FillterBar
@@ -51,6 +58,7 @@ class DesignerList extends React.Component{
             },1000)
           }}
         />
+
         <Designer />
       </View>
     )

@@ -27,7 +27,11 @@ class FillterBar extends React.Component{
               key={i} 
               onPress={this.fillterChange.bind(this,i)}
             >
-              <Text style={styles.fillterBarItemText}>{text}</Text>
+              {
+                typeof text === 'string'
+                ? <Text style={styles.fillterBarItemText}>{text}</Text>
+                : text
+              }
               <Animated.View 
                 style={[
                   styles.fillterBarItemIcon,
