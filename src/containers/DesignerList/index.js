@@ -15,7 +15,7 @@ const PickerChild = (props)=>(
 const items = [
   {
     id: 1,
-    text: ''
+    text: '正在定位'
   },
   {
     id: 2,
@@ -54,6 +54,7 @@ class DesignerList extends React.Component{
           visible={cityPickerVisible} 
           onChange={this.cityPickerChange.bind(this)}
           value={cityPickerValue}
+          nation={true}
         >
           <View></View>
         </CityPicker>
@@ -76,7 +77,6 @@ class DesignerList extends React.Component{
   cityPickerChange(value,name){
     let {filterBarItems} = this.state;
     filterBarItems[0].text = name[1];
-    console.log(name);
     this.setState({
       fillterActive: null,
       cityPickerVisible: false,

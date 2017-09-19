@@ -50,14 +50,15 @@ class CityPicker extends React.Component {
           // onChange && onChange(v);
         }}
       >
-      {
-        children
-      }
+        {
+          children
+        }
     </Picker>
     )
   }
 
   async componentDidMount(){
+    const { nation } = this.props;
     let cityData = null;
     let cityMes = null;
     try{
@@ -107,6 +108,21 @@ class CityPicker extends React.Component {
           }
         }
       );
+
+      if(nation){
+        parseData.unshift({
+         "value": "1-1-1-1",
+          "label": "全国",
+          "children": [
+            {
+              "value": "1-1-1-1",
+              "label": "全国"
+            }
+          ]
+        })
+      }
+
+
       this.setState({
         cityData: parseData,
         sValue: value.length === 2 ? value : null
@@ -118,6 +134,7 @@ class CityPicker extends React.Component {
   componentDidUpdate(prevProps, prevState){
     const {sValue,cityData} =  this.state;
     const {onChange} =  this.props;
+    if(!cityData) return;
 
     // var sLabel = cityData.find((value, index, arr)=>{
     //   // return value > 9;
