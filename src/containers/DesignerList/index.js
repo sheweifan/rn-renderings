@@ -80,7 +80,7 @@ class DesignerList extends React.Component{
     this.setState({
       fillterActive: null,
       cityPickerVisible: false,
-      cityPickerValue: value,
+      cityPickerValue: value == null ? ['1-1-1-1','1-1-1-1']:value,
       filterBarItems
     })
   }
