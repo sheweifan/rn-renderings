@@ -116,13 +116,62 @@ class CityPicker extends React.Component {
 
   }
   componentDidUpdate(prevProps, prevState){
-    const {sValue} =  this.state;
+    const {sValue,cityData} =  this.state;
     const {onChange} =  this.props;
+
+    // var sLabel = cityData.find((value, index, arr)=>{
+    //   // return value > 9;
+    //   let _arr = [];
+    //   if(value.value === sValue[0]){
+    //     _arr[0] = value.label;
+    //     value.children.find((value, index, arr)=>{
+
+    //       if(value.value === sValue[0]){
+    //         _arr[1] = value.label
+    //       }
+
+    //     })
+    //   }
+    //   return _arr;
+    // })
+    var sLabel= []
+
+    for( let i of cityData){
+      if( i.value === sValue[0] ){
+        sLabel[0] = i.label;
+          
+          for(let j of i.children){
+            if(j.value === sValue[1]){
+              sLabel[1] = j.label;
+            }
+          }
+      }
+    }
+
     if(prevState.sValue !== sValue){
-      onChange && onChange(sValue);
+      onChange && onChange(
+        sValue,sLabel
+      );
     }
 
   }
 }
 
 export default CityPicker;
+
+
+
+// for( let i in cityData){
+//       if( i.value === sValue[0] ){
+//         console.log(i)
+//         sLabel[0] = i.value;
+          
+//           for(let j in i.children){
+//             if(j.value === sValue[1]){
+//               sLabel[1] = j.value;
+//             }
+//           }
+//       }
+//     }
+
+//     conosle.log(1111111,sLabel);

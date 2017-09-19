@@ -7,14 +7,15 @@ import Designer from '../../components/Designer';
 import CityPicker from '../../components/CityPicker';
 const {width, height} = Dimensions.get('window');
 
+const PickerChild = (props)=>(
+  <TouchableOpacity onPress={props.onChange}>
+    <Text>{props.extra || '全国'}</Text>
+  </TouchableOpacity>
+)
 const items = [
   {
     id: 1,
-    text: (
-       <CityPicker>
-        <View></View>
-        </CityPicker>
-    )
+    text: ''
   },
   {
     id: 2,
@@ -33,35 +34,55 @@ class DesignerList extends React.Component{
     super(props);
     this.state={
       fillterActive: null,
-      cityPickerVisible: true
+      cityPickerVisible: false,
+      cityPickerValue: [0,0],
+      filterBarItems: items
     }
   }
  
   render(){
-    const {fillterActive, cityPickerVisible} = this.state;
-    console.log(cityPickerVisible)
+    const {fillterActive, cityPickerVisible,cityPickerValue,filterBarItems} = this.state;
     return (
       <View Style={styles.detailContainer}>
         <FillterBar
           active={fillterActive}
-          items={items}
-          onChange={ (i)=> {
-            this.setState({
-              fillterActive: i
-            })
-
-            setTimeout(()=>{
-
-              this.setState({
-                fillterActive: null
-              })
-            },1000)
-          }}
+          items={filterBarItems}
+          onChange={ this.fillterBarChange.bind(this) }
         />
+
+        <CityPicker 
+          visible={cityPickerVisible} 
+          onChange={this.cityPickerChange.bind(this)}
+          value={cityPickerValue}
+        >
+          <View></View>
+        </CityPicker>
 
         <Designer />
       </View>
     )
+  }
+  fillterBarChange(i){
+    this.setState({
+      fillterActive: i,
+      cityPickerVisible: i===0 ? true:false
+    })
+    // setTimeout(()=>{
+    //   this.setState({
+    //     fillterActive: null
+    //   })
+    // },1000)
+  }
+  cityPickerChange(value,name){
+    let {filterBarItems} = this.state;
+    filterBarItems[0].text = name[1];
+    console.log(name);
+    this.setState({
+      fillterActive: null,
+      cityPickerVisible: false,
+      cityPickerValue: value,
+      filterBarItems
+    })
   }
 }
 
