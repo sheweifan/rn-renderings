@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import FillterBar from '../../components/FillterBar';
 import Designer from '../../components/Designer';
 import CityPicker from '../../components/CityPicker';
+import FillterMenu from '../../components/FillterMenu';
 const {width, height} = Dimensions.get('window');
 
 const PickerChild = (props)=>(
@@ -36,12 +37,22 @@ class DesignerList extends React.Component{
       fillterActive: null,
       cityPickerVisible: false,
       cityPickerValue: [0,0],
-      filterBarItems: items
+      filterBarItems: items,
+      fillterMenuData: [
+        '签单数',
+        '作品数',
+      ],
+      fillterMenuHidden: true
     }
   }
  
   render(){
-    const {fillterActive, cityPickerVisible,cityPickerValue,filterBarItems} = this.state;
+    const { fillterActive, 
+      cityPickerVisible, 
+      cityPickerValue, 
+      filterBarItems, 
+      fillterMenuData, 
+      fillterMenuHidden } = this.state;
     return (
       <View Style={styles.detailContainer}>
         <FillterBar
@@ -49,6 +60,11 @@ class DesignerList extends React.Component{
           items={filterBarItems}
           onChange={ this.fillterBarChange.bind(this) }
         />
+        <ScrollView>
+          <Designer />
+        </ScrollView>
+
+
 
         <CityPicker 
           visible={cityPickerVisible} 
@@ -59,14 +75,23 @@ class DesignerList extends React.Component{
           <View></View>
         </CityPicker>
 
-        <Designer />
+        <FillterMenu
+          data={fillterMenuData}
+          hidden={fillterMenuHidden}
+        />
       </View>
     )
   }
   fillterBarChange(i){
+    // console.log(i,this.state)
+    let fillterMenuHidden = false;
+    if(i!==0 && i == null){
+      fillterMenuHidden= true
+    }
     this.setState({
       fillterActive: i,
-      cityPickerVisible: i===0 ? true:false
+      cityPickerVisible: i===0 ,
+      fillterMenuHidden
     })
     // setTimeout(()=>{
     //   this.setState({
@@ -88,7 +113,9 @@ class DesignerList extends React.Component{
 
 const btnH = 55;
 const styles = StyleSheet.create({
-  
+  detailContainer:{
+    flex: 1,
+  }
 })
 
 
