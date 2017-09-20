@@ -76,11 +76,11 @@ class DesignerList extends React.Component{
   }
   cityPickerChange(value,name){
     let {filterBarItems} = this.state;
-    filterBarItems[0].text = name[1];
+    filterBarItems[0].text = name[1] || '全国';
     this.setState({
       fillterActive: null,
       cityPickerVisible: false,
-      cityPickerValue: value == null ? ['1-1-1-1','1-1-1-1']:value,
+      cityPickerValue: value,
       filterBarItems
     })
   }

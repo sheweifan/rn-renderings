@@ -1,5 +1,5 @@
 
-import { Location, Permissions } from 'expo';
+// import { Location, Permissions } from 'expo';
 
 // import {GetCityMes_get} from '../api/api/my';
 
@@ -18,35 +18,36 @@ import { Location, Permissions } from 'expo';
 const getLocation = () =>{
 
   return new Promise((res,rej)=>{
+    navigator.geolocation.getCurrentPosition((position) => {
+        // console.log(position);
+        // console.log('navigator',position)
+        res(position);
+      },(error) => {
+        // console.log('getLocation error',error)
+        rej(error);
+      },{
+        enableHighAccuracy: true, 
+        timeout: 3000,
+        maximumAge: 1000
+      }
+    );
     // 安卓闪退，试用expo sdk..
-    // console.log(navigator.geolocation)
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //     res(position);
-    //   },(error) => {
-    //     // console.log('getLocation error',error)
-    //     rej(error);
-    //   },{
-    //     enableHighAccuracy: true, 
-    //     timeout: 2000, 
-    //     maximumAge: 1000
-    //   }
-    // );
-    Permissions.askAsync(Permissions.LOCATION)
-      .then(({ status })=>{
-        if (status === 'granted') {
-          Location.getCurrentPositionAsync({
-            // enableHighAccuracy: true
-          })
-            .then(location=>{
-              // console.log(location);
-              res(location);
-            })
-            .catch(e=>rej(e))
-        }else{
-          rej(e);
-        }
-      })
-      .catch(e=>rej(e))
+    // Permissions.askAsync(Permissions.LOCATION)
+    //   .then(({ status })=>{
+    //     if (status === 'granted') {
+    //       Location.getCurrentPositionAsync({
+    //         // enableHighAccuracy: true
+    //       })
+    //         .then(location=>{
+    //           // console.log(location);
+    //           res(location);
+    //         })
+    //         .catch(e=>rej(e))
+    //     }else{
+    //       rej(e);
+    //     }
+    //   })
+    //   .catch(e=>rej(e))
 
   })
 };

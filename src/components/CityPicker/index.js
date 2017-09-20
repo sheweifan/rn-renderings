@@ -135,7 +135,7 @@ class CityPicker extends React.Component {
     const {sValue,cityData} = this.state;
     const {onChange} =  this.props;
     const sLabel= new Array(2).fill('');
-    if(sValue != null){
+    if(sValue != null && cityData != null){
 
       for( let i of cityData){
         if( i.value === sValue[0] ){
