@@ -11,6 +11,8 @@ import Search from './containers/Search';
 import MapList from './containers/MapList';
 import FreeDisign from './containers/FreeDisign';
 import DesignerList from './containers/DesignerList';
+import DesignerDetail from './containers/DesignerDetail';
+
 
 import icon_index from './static/images/nav/icon_index.png'
 import icon_index_active from './static/images/nav/icon_index_active.png'
@@ -57,6 +59,7 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
+  DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
   FreeDisign: { screen: FreeDisign },
   Home: { screen: MainScreenNavigator },

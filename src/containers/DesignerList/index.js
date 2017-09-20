@@ -54,23 +54,25 @@ class DesignerList extends React.Component{
       fillterMenuData, 
       fillterMenuHidden } = this.state;
     return (
-      <View Style={styles.detailContainer}>
+      <View style={styles.detailContainer}>
         <FillterBar
           active={fillterActive}
           items={filterBarItems}
           onChange={ this.fillterBarChange.bind(this) }
         />
-        <ScrollView>
+        <ScrollView
+        >
+          <Designer />
           <Designer />
         </ScrollView>
-
-
 
         <CityPicker 
           visible={cityPickerVisible} 
           onChange={this.cityPickerChange.bind(this)}
           value={cityPickerValue}
           nation={true}
+          onDismiss={()=>this.setState({cityPickerVisible:false,fillterActive: null})}
+          onOk={()=>this.setState({cityPickerVisible:false,fillterActive: null})}
         >
           <View></View>
         </CityPicker>
@@ -84,9 +86,9 @@ class DesignerList extends React.Component{
   }
   fillterBarChange(i){
     // console.log(i,this.state)
-    let fillterMenuHidden = false;
-    if(i!==0 && i == null){
-      fillterMenuHidden= true
+    let fillterMenuHidden = true;
+    if(i!==0){
+      fillterMenuHidden = (i == null)
     }
     this.setState({
       fillterActive: i,
@@ -113,7 +115,7 @@ class DesignerList extends React.Component{
 
 const btnH = 55;
 const styles = StyleSheet.create({
-  detailContainer:{
+  detailContainer: {
     flex: 1,
   }
 })
