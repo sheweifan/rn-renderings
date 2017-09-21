@@ -12,6 +12,7 @@ import MapList from './containers/MapList';
 import FreeDisign from './containers/FreeDisign';
 import DesignerList from './containers/DesignerList';
 import DesignerDetail from './containers/DesignerDetail';
+import ImageView from './containers/ImageView';
 
 
 import icon_index from './static/images/nav/icon_index.png'
@@ -59,10 +60,11 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
+  ImageView: { screen: ImageView },
+  Home: { screen: MainScreenNavigator },
   DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
   FreeDisign: { screen: FreeDisign },
-  Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
   MapList: { screen: MapList },
   Detail: { screen: Detail },
@@ -73,13 +75,15 @@ export default StackNavigator({
     headerBackTitle: null,
     headerTintColor: '#000000',
     headerStyle: _g.headerStyle,
+
     // headerTitleStyle:{
     //   alignSelf: 'center'
     //   // display: 'flex',
     //   // justifyContent: 'center',
     //   // alignItems: 'center'
     // },
-  }
+  },
+  headerMode: 'screen'
 });
 
 

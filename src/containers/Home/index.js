@@ -71,7 +71,12 @@ class Index extends React.Component {
               start={[0,0.5]}
               end={[1,0.5]}
             >
+            <TouchableOpacity 
+              style={[styles.topLink]}
+              onPress={()=>navigate('DesignerList')}
+            >
               <Text style={styles.topLinkText}>设计师</Text>
+            </TouchableOpacity>
             </LinearGradient>
           </TouchableOpacity>
           

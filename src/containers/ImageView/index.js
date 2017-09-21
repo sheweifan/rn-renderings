@@ -22,9 +22,9 @@ const imglist = [
 ]
 
 
-class Detail extends React.Component{
+class ImageView extends React.Component{
   static navigationOptions = {
-    title: 'Detail',
+    title: 'ImageView',
     header: null
   }
   constructor(props){
@@ -67,9 +67,11 @@ class Detail extends React.Component{
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.fixedBtn}>
-          <Text style={styles.fixedBtnText}>0元设计</Text>
-        </TouchableOpacity>
+        {
+          // <TouchableOpacity style={styles.fixedBtn}>
+          //   <Text style={styles.fixedBtnText}>0元设计</Text>
+          // </TouchableOpacity>
+        }
         <TouchableOpacity style={styles.goback}>
           <Icon name="md-arrow-back" size={28} style={styles.gobackIcon} color='#fff'/>
         </TouchableOpacity>
@@ -99,12 +101,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   swiper: {
-    height: height-btnH,
+    height: height,
     backgroundColor: 'transparent',
     backgroundColor: '#000'
   },
   swiperItem: {
-    height: height - btnH,
+    height: height,
     width: width,
     display: 'flex',
     justifyContent: 'center',
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: btnH,
+    bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
   designInner: {
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
 })
 
 
-export default Detail;
+export default ImageView;
 
 
 // export default StackNavigator({
