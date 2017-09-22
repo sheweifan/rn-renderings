@@ -39,6 +39,7 @@ class ImageView extends React.Component{
     })
   }
   render(){
+    const { navigation } = this.props;
     const { selectedIndex } = this.state;
     return (
       <View Style={styles.detailContainer}>
@@ -60,7 +61,7 @@ class ImageView extends React.Component{
           <View style={styles.designInner}>
             <Image style={styles.designAvatar} source={{uri: 'https://dummyimage.com/140x140/f700ff/000.png&text=avatar'}}/>
             <Text style={styles.imgDesc}>
-              现代简约客厅电视背景墙激情装修效修效果图
+              现代简约客厅电视背景墙激情装修效修效果图现代简约客厅电视
             </Text>
             <Text style={styles.swiperProgress}>
               {selectedIndex+1}/{imglist.length}
@@ -72,7 +73,10 @@ class ImageView extends React.Component{
           //   <Text style={styles.fixedBtnText}>0元设计</Text>
           // </TouchableOpacity>
         }
-        <TouchableOpacity style={styles.goback}>
+        <TouchableOpacity 
+          style={styles.goback}
+          onPress={()=> navigation.goBack()}
+        >
           <Icon name="md-arrow-back" size={28} style={styles.gobackIcon} color='#fff'/>
         </TouchableOpacity>
       </View>
@@ -169,3 +173,4 @@ export default ImageView;
 // export default StackNavigator({
 //   Home: { screen: Index },
 // });
+// 

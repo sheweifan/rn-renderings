@@ -14,9 +14,8 @@ import DesignerList from './containers/DesignerList';
 import DesignerDetail from './containers/DesignerDetail';
 import ImageView from './containers/ImageView';
 
-
-import icon_index from './static/images/nav/icon_index.png'
-import icon_index_active from './static/images/nav/icon_index_active.png'
+import icon_index from './static/images/nav/icon_index.png';
+import icon_index_active from './static/images/nav/icon_index_active.png';
 
 const MainScreenNavigator = TabNavigator(
   {
@@ -60,8 +59,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  ImageView: { screen: ImageView },
   Home: { screen: MainScreenNavigator },
+  ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
   FreeDisign: { screen: FreeDisign },
