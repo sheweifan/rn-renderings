@@ -6,7 +6,7 @@ import _g from './config/global.js';
 
 import Index from './containers/Home';
 import Find from './containers/Find';
-import Detail from './containers/Detail';
+// import Detail from './containers/Detail';
 import Search from './containers/Search';
 import MapList from './containers/MapList';
 import FreeDisign from './containers/FreeDisign';
@@ -33,28 +33,28 @@ const MainScreenNavigator = TabNavigator(
       inactiveTintColor: '#999', // 文字和图片默认颜色
       showIcon: true, // android 默认不显示 icon, 需要设置为 true 才会显示
       indicatorStyle: { height: 0 }, // android 中TabBar下面会显示一条线，高度设为 0 后就不显示线了
-      style:{
+      style: {
         // paddingBottom: 0,
         // height: 40,
         backgroundColor: '#fff', // TabBar 背景色
         borderTopWidth: 1,
         borderTopColor: '#ececec',
         paddingBottom: _g.os === 'android'? 0 : 3,
-        paddingTop: 0,
-        // height: 50
+        padding: 0,
+        ...(_g.os==='android'?{height: 48}:{})
       },
       indicatorStyle:{
         height: 0
       },
       labelStyle: {
         fontSize: 12, // 文字大小
-        marginBottom: 0,
-        marginTop: 0
+        margin: 0,
       },
-      // iconStyle:{
-      //   paddingTop:0,
-      //   paddingBottom:0
-      // }
+      iconStyle: _g.os === 'android'? {
+        margin:0,
+        padding:0,
+        marginTop: -4
+      }: {}
     },
 });
 
@@ -66,7 +66,7 @@ export default StackNavigator({
   FreeDisign: { screen: FreeDisign },
   Search: { screen: Search },
   MapList: { screen: MapList },
-  Detail: { screen: Detail },
+  // Detail: { screen: Detail },
 },{
   gesturesEnabled: false, // 是否允许右滑返回，在iOS上默认为true，在Android上默认为false
   navigationOptions:{
