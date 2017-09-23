@@ -5,38 +5,23 @@ const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 import shadowImg from '../../static/images/itembg.png';
 const Imgs = props => {
+  const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName } = props;
   return (
     <View>
       <TouchableHighlight>
         <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
+            <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
             <View style={styles.itemBottom}>
               <View style={styles.itemStyleCount}>
-                <Text style={[styles.itemText,styles.itemStyle]}>现代简约</Text>
+                <Text style={[styles.itemText,styles.itemStyle]}>{ StyleName }</Text>
                 <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
-                <Text style={[styles.itemText,styles.itemCount]}>4图</Text>
+                <Text style={[styles.itemText,styles.itemCount]}>{ ImgCount }图</Text>
               </View>
             </View>
             <Image style={styles.itemTitle} source={shadowImg}>
-              <Text style={styles.itemTitleInfo} numberOfLines={1}>现代简约清新效新效果图</Text>
+              <Text style={styles.itemTitleInfo} numberOfLines={1}>{ TitleName }</Text>
             </Image>
-            <Image style={styles.itemAvatar} source={{uri:'https://dummyimage.com/114x114/c8d2c2'}}/>
-        </View>
-      </TouchableHighlight>
-      <TouchableHighlight>
-        <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
-            <View style={styles.itemBottom}>
-              <View style={styles.itemStyleCount}>
-                <Text style={[styles.itemText,styles.itemStyle]}>现代简约</Text>
-                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
-                <Text style={[styles.itemText,styles.itemCount]}>4图</Text>
-              </View>
-            </View>
-            <Image style={styles.itemTitle} source={shadowImg}>
-              <Text style={styles.itemTitleInfo} numberOfLines={1}>现代简约清新效新效果图</Text>
-            </Image>
-            <Image style={styles.itemAvatar} source={{uri:'https://dummyimage.com/114x114/c8d2c2'}}/>
+            <Image style={styles.itemAvatar} source={{uri: FaceImage}}/>
         </View>
       </TouchableHighlight>
     </View>

@@ -38,18 +38,18 @@ function DesignQuotation_post(opts) {
 }
 
 /** 设计师作品 */
-function Designer_Ep_post(opts) {
+function Designer_Ep_get(opts) {
   return instance({
-    method: 'post',
+    method: 'get',
     url:  '/Designer_Ep',
     opts: opts
   });
 }
 
 /** 设计师列表 */
-function GetSolrDesigner_post(opts) {
+function GetSolrDesigner_get(opts) {
   return instance({
-    method: 'post',
+    method: 'get',
     url:  '/GetSolrDesigner',
     opts: opts
   });
@@ -74,18 +74,18 @@ function LoadType_get(opts) {
 }
 
 /** 套图接口 */
-function TXgt_post(opts) {
+function TXgt_get(opts) {
   return instance({
-    method: 'post',
+    method: 'get',
     url:  '/TXgt',
     opts: opts
   });
 }
 
 /** 单图接口 */
-function DXgt_post(opts) {
+function DXgt_get(opts) {
   return instance({
-    method: 'post',
+    method: 'get',
     url:  '/DXgt',
     opts: opts
   });
@@ -96,10 +96,10 @@ export {
   ImgBaseInfo_get,
   DesignerInfo_get,
   DesignQuotation_post,
-  Designer_Ep_post,
-  GetSolrDesigner_post,
+  Designer_Ep_get,
+  GetSolrDesigner_get,
   GetProvinceAndCity_get,
   LoadType_get,
-  TXgt_post,
-  DXgt_post
+  TXgt_get,
+  DXgt_get
 };
