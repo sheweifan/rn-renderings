@@ -106,7 +106,7 @@ class Index extends React.Component {
         }}
         onEndReached={this.loadMore.bind(this)}
         ListFooterComponent={<LoadingState loading={loading}/>}
-        refreshing={loading}
+        refreshing={false}
         onRefresh={this.refresh.bind(this)}
       >
       </FlatList>
@@ -153,8 +153,8 @@ class Index extends React.Component {
   refresh(){
     this.setState({
       data: [],
-    })
-    this.loadData.bind(this)(1);
+    },()=>this.loadData.bind(this)(1));
+    
   }
   loadMore(){
     const { pageIndex, CountPage, state } = this;
