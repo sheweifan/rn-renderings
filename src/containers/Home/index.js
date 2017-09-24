@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Img from '../../components/Img';
 import Imgs from '../../components/Imgs';
+import LoadingState from '../../components/LoadingState';
 
 import icon_index from '../../static/images/nav/icon_index.png'
 import icon_index_active from '../../static/images/nav/icon_index_active.png'
@@ -38,11 +39,12 @@ class Index extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data: []
+      data: [],
+      loading: true
     }
   }
   render() {
-    const { data } = this.state;
+    const { data, loading } = this.state;
     const { navigate } = this.props.navigation;
     const Top = ()=> (
       <View>
@@ -102,23 +104,59 @@ class Index extends React.Component {
         renderItem={({item,index})=>{
           return <Imgs key={index} {...item}/>
         }}
+        onEndReached={this.loadMore.bind(this)}
+        ListFooterComponent={<LoadingState loading={loading}/>}
       >
       </FlatList>
       );
   }
-  componentDidMount(){
+  loadData(idx){
+    const { pageIndex, CountPage, state } = this;
+    let { loading,data } = state;
+    // if(loading || pageIndex >= CountPage) {
+    //   loading = null;
+    //   return;
+    // }
+    this.pageIndex = idx;
+    loading = true
+    this.setState({
+      loading
+    })
     TXgt_get({
       params: {
         pageSize: 10,
-        pageIndex: 1
+        pageIndex: pageIndex
       }
     })
-      .then(data=>{
-    // console.log(data)
+      .then(({Data,CountPage})=>{
+        const newData = data.concat(Data);
+        console.log(newData.length)
+        let loading = false;
+        if(CountPage === pageIndex){
+          loading = null;
+        }
+
         this.setState({
-          data: data.Data
+          data: newData,
+          loading
         })
+
+        this.CountPage = CountPage;
+
       })
+  }
+  componentDidMount(){
+    this.loadData.bind(this)(1);
+  }
+  loadMore(){
+    const { pageIndex, CountPage, state } = this;
+    let { loading,data } = state;
+    if(loading || loading== null) {
+      loading = null;
+      return;
+    }
+    this.pageIndex = pageIndex+ 1;
+    this.loadData.bind(this)(this.pageIndex);
   }
 }
 
