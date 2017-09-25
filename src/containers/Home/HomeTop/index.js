@@ -8,7 +8,7 @@ const {height, width} = Dimensions.get('window');
 const HomeTop = ({navigate})=> (
   <View>
     <View style={styles.banner}>
-      <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c'}}>
+      <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c/ffffff&text=Weifan-She'}}>
       </Image>
       <TouchableOpacity 
         activeOpacity={1}
