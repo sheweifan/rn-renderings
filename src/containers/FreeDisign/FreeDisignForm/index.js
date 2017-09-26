@@ -264,6 +264,12 @@ class FreeDisignForm extends React.Component {
       quoteCode: verifyCode,// 短信验证码
       cityId: CitySelected[1],// 城市ID
     }
+
+
+    this.setState({
+      loadingInfo: '正在提交...'
+    })
+
     // `IsSendSms=${opts.IsSendSms}&cityId=${opts.cityId}&quoteCode=${opts.quoteCode}&quoteTel=${opts.quoteTel}`
     DesignQuotation_post({
       data: opts
@@ -276,6 +282,7 @@ class FreeDisignForm extends React.Component {
             phonenum: '',
             phonenumError: true,
             verifyCode: '',
+            loadingInfo: ''
           })
         }else{
           // Modal.alert(
@@ -283,6 +290,10 @@ class FreeDisignForm extends React.Component {
           //   <Text style={{textAlign: 'center',display: 'flex',padding: 20}}>提交失败，请稍后重试</Text>, 
           //   [{ text: '确定'},]
           // )
+          
+          this.setState({
+            loadingInfo: ''
+          })
           Modal.alert(
             '提交失败，请稍后重试', 
             '', 
