@@ -27,7 +27,7 @@ const getLocation = () =>{
         rej(error);
       },{
         enableHighAccuracy: true, 
-        timeout: 3000,
+        timeout: 1000,
         maximumAge: 1000
       }
     );
