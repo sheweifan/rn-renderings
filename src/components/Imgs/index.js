@@ -13,9 +13,9 @@ const Imgs = props => {
             <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
             <View style={styles.itemBottom}>
               <View style={styles.itemStyleCount}>
-                <Text style={[styles.itemText,styles.itemStyle]}>{ StyleName }</Text>
-                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
                 <Text style={[styles.itemText,styles.itemCount]}>{ ImgCount }图</Text>
+                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
+                <Text style={[styles.itemText,styles.itemStyle]}>{ StyleName }</Text>
               </View>
             </View>
             <Image style={styles.itemTitle} source={shadowImg}>
