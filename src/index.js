@@ -59,12 +59,12 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
+  Search: { screen: Search },
   Home: { screen: MainScreenNavigator },
   ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
   FreeDisign: { screen: FreeDisign },
-  Search: { screen: Search },
   MapList: { screen: MapList },
   // Detail: { screen: Detail },
 },{
