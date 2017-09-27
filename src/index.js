@@ -59,8 +59,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 export default StackNavigator({
-  Search: { screen: Search },
   Home: { screen: MainScreenNavigator },
+  Search: { screen: Search },
   ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
