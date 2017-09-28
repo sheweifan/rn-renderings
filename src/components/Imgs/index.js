@@ -1,14 +1,18 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 import shadowImg from '../../static/images/itembg.png';
 const Imgs = props => {
-  const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName } = props;
+  const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName, go } = props;
   return (
     <View>
-      <TouchableHighlight>
+      <TouchableHighlight
+        onPress={()=>{go({routeName: 'ImageView',})}}
+      >
         <View style={styles.item}>
             <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
             <View style={styles.itemBottom}>
@@ -101,4 +105,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Imgs
+export default connect(
+  (state)=>{
+    console.log(state);
+    return {}
+  },
+  (dispatch)=>{
+    return {
+      go: (path)=>dispatch(NavigationActions.navigate(path))
+    }
+  }
+)(Imgs);

@@ -1,6 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator,addNavigationHelpers } from 'react-navigation';
+import { Provider, connect } from "react-redux";
+
+import getStore from './store';
+
+
 
 import _g from './config/global.js';
 
@@ -58,7 +63,7 @@ const MainScreenNavigator = TabNavigator(
     },
 });
 
-export default StackNavigator({
+const AppNavigator = StackNavigator({
   Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
   ImageView: { screen: ImageView },
@@ -86,10 +91,43 @@ export default StackNavigator({
 });
 
 
+const mapStateToProps = (state) => ({
+  nav: state.nav
+});
+
+@connect(mapStateToProps)
+class App extends React.Component {
+    render() {
+        return (
+            <AppNavigator
+                navigation={addNavigationHelpers({
+                    dispatch: this.props.dispatch,
+                    state: this.props.nav
+                })}
+            />
+        );
+    }
+}
+
+const navReducer = (state, action) => {
+  const newState = AppNavigator.router.getStateForAction(action, state);
+  return newState || state;
+};
+
+const store = getStore(navReducer);
+// export default AppRouter;
+export default function Root() {
+    return (
+        <Provider store={store}>
+          <App />
+        </Provider>
+    );
+}
+
+
+
 // React Native专题
 // http://www.lcode.org/react-native/
 
 // LayoutAnimation
 // http://www.lcode.org/react-native-api%E6%A8%A1%E5%9D%97%E4%B9%8Blayoutanimation%E5%B8%83%E5%B1%80%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3-androidios%E9%80%9A%E7%94%A862/
-
-
