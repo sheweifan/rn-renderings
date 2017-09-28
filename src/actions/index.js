@@ -1,4 +1,4 @@
-import * as search from '../search';
+import * as search from './search';
 
 export default {
 	...search

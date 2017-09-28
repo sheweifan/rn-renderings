@@ -15,13 +15,13 @@ const initState = {
 export default search = (state=initState, action) => {
   switch(action.type){
     case SEARCH_SELECT_CHANGE:
-      return Object.ssign({},state,{ searchSelected: action.selected })
+      return Object.assign({},state,{ searchSelected: action.selected })
     case SEARCH_KEY_CHANGE:
-      return Object.ssign({},state,{ searchKey: action.text })
+      return Object.assign({},state,{ searchKey: action.text })
     case SEARCH_HISTORY_CHANGE:
-      return Object.ssign({},state,{ searchHistory: state.searchHistory.cancat([item])} )
+      return Object.assign({},state,{ searchHistory: state.searchHistory.cancat([item])} )
     case SEARCH_HISTORY_CLEAN:
-      return Object.ssign({},state,{ searchHistory: []} )
+      return Object.assign({},state,{ searchHistory: []} )
     default: 
       return state
   }
