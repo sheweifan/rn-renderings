@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
 
 export default connect(
   (state)=>{
-    console.log(state);
     return {}
   },
   (dispatch)=>{

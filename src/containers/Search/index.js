@@ -27,7 +27,7 @@ class Search extends React.Component{
     const { navigation } = this.props;
     return (
       <View style={styles.searchOuter}>
-        <SearchHeader navigation={navigation} />
+        <SearchHeader/>
         <SearchHistory />
         {
           // <Text>

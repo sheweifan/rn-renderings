@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 import { 
   StyleSheet,
   Text,
@@ -12,8 +14,8 @@ import {
   Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import actions,{searchKeyChange, searchSelectChange} from '../../../actions';
 import _g,{ os, appOft } from '../../../config/global';
-
 const selectData = [
   {
     name: '套图',
@@ -32,6 +34,22 @@ const selectData = [
   }
 ]
 
+@connect(
+  (state)=>{
+    const {searchKey, searchSelected} = state.search;
+    return {
+      searchKey,
+      searchSelected
+    }
+  },
+  (dispatch)=>{
+    return {
+      goBack: ()=>dispatch(NavigationActions.goBack()),
+      searchKeyChange: (text)=> dispatch(actions.searchKeyChange(text)),
+      searchSelectChange: (selected)=> dispatch(actions.searchSelectChange(selected))
+    }
+  }
+)
 class SearchHeader extends React.Component{
   constructor(props){
     super(props);
@@ -47,7 +65,9 @@ class SearchHeader extends React.Component{
   }
   render(){
     const { pageX, pageY, modelShow, selectAnimate, selected, searchKey } = this.state;
-    const {goBack} = this.props.navigation;
+    const { goBack, searchSelected, searchKeyChange} = this.props;
+
+
     return (
       <View style={styles.header}>
 
@@ -62,7 +82,7 @@ class SearchHeader extends React.Component{
             activeOpacity={1}
           >
             <Text style={styles.selectText}>
-              { selectData[selected].name }
+              { selectData[searchSelected].name }
             </Text>
             <View
               style={styles.iconOuter} 
@@ -83,6 +103,10 @@ class SearchHeader extends React.Component{
             style={styles.searchInput}
             value={searchKey}
             onChangeText={(sk)=> this.searchKeyChange.call(this,sk)}
+            onSubmitEditing={()=> searchKeyChange(searchKey)}
+
+            returnKeyType="search"
+            returnKeyLabel="search"
           />
 
           {
@@ -93,7 +117,6 @@ class SearchHeader extends React.Component{
               </TouchableOpacity>)
           }
           
-
         </View>
 
         <Modal
@@ -222,12 +245,13 @@ class SearchHeader extends React.Component{
     
   }
   selectChange(idx){
-
+    const { searchSelectChange } = this.props;
     this.selectModalChange(false)
       .then(()=>{
-        this.setState({
-          selected: idx
-        })
+        searchSelectChange(idx)
+        // this.setState({
+        //   selected: idx
+        // })
       })
   }
 }

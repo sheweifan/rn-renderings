@@ -64,8 +64,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 const AppNavigator = StackNavigator({
-  Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
+  Home: { screen: MainScreenNavigator },
   ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
   DesignerList: { screen: DesignerList },
