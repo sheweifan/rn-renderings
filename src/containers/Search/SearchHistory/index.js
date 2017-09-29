@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux";
 import {
   StyleSheet, 
   Text, 
@@ -8,49 +9,68 @@ import {
   TouchableOpacity, 
   AsyncStorage,
   ScrollView } from 'react-native';
+import actions from '../../../actions';
 const {width, height} = Dimensions.get('window');
 
-
+@connect(
+  (({search})=>{
+    return {
+      searchHistory: search.searchHistory
+    }
+  }),
+  (dispatch)=>{
+    return {
+      clearHistory: ()=> dispatch(actions.searchHistoryClean()),
+      initHistory: ()=> dispatch(actions.searchHistoryInit()),
+      addHistory: (item)=> dispatch(actions.searchHistoryAdd(item))
+    }
+  }
+)
 class SearchHistory extends React.Component{
+  constructor(props){
+    super(props);
+  }
   render(){
+    const {searchHistory,clearHistory, addHistory} = this.props;
+    if(searchHistory.length === 0){
+      return null;
+    }
     return (
       <ScrollView contentContainerStyle={styles.searchHistoryOuter}>
         <View style={styles.searchHistoryHd}>
           <Text style={styles.searchHistoryTitle}>历史记录</Text>
-          <TouchableOpacity style={[styles.searchBtn,styles.searchHistoryResetBtn]}>
+          <TouchableOpacity 
+            style={[styles.searchBtn,styles.searchHistoryResetBtn]}
+            onPress={()=>clearHistory()}
+          >
             <Text style={[styles.searchBtnText,styles.searchHistoryResetBtnText]}>清空记录</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.SearchHistoryList}>
-          <TouchableOpacity style={[styles.searchBtn,styles.SearchHistoryItem]}>
-            <Text style={[styles.searchBtnText]}>清空记录</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.searchBtn,styles.SearchHistoryItem]}>
-            <Text style={[styles.searchBtnText]}>清空记</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.searchBtn,styles.SearchHistoryItem]}>
-            <Text style={[styles.searchBtnText]}>清空录</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.searchBtn,styles.SearchHistoryItem]}>
-            <Text style={[styles.searchBtnText]}>清空记录</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.searchBtn,styles.SearchHistoryItem]}>
-            <Text style={[styles.searchBtnText]}>软装搭配注意事项</Text>
-          </TouchableOpacity>
+          {
+            searchHistory.map((item,index)=>
+              <TouchableOpacity 
+                key={index} 
+                style={[styles.searchBtn,styles.SearchHistoryItem]}
+                onPress={()=>{
+                  addHistory('fuck2')
+                }}
+              >
+                <Text style={[styles.searchBtnText]}>{item}</Text>
+              </TouchableOpacity>
+            )
+          }
         </View>
       </ScrollView>
-    )
+    ) 
   }
   componentDidMount(){
-    AsyncStorage.setItem('fuck','fuck')
-    AsyncStorage.getItem('fuck')
-      .then((data)=>{
-        // console.log(data);
-      })
+    const { initHistory } = this.props;
+    initHistory();
   }
 }
 
-var padding = 12
+const padding = 12;
 const styles = StyleSheet.create({
   searchHistoryOuter:{
     backgroundColor: '#fff',
