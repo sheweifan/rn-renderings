@@ -46,7 +46,9 @@ const selectData = [
     return {
       goBack: ()=>dispatch(NavigationActions.goBack()),
       searchKeyChange: (text)=> dispatch(actions.searchKeyChange(text)),
-      searchSelectChange: (selected)=> dispatch(actions.searchSelectChange(selected))
+      searchSelectChange: (selected)=> dispatch(actions.searchSelectChange(selected)),
+      addHistory: (item)=> dispatch(actions.searchHistoryAdd(item)),
+      historyVisableChange: (visable) => dispatch(actions.searchHistoryVisableChange(visable))
     }
   }
 )
@@ -61,12 +63,10 @@ class SearchHeader extends React.Component{
       selected: 0,
       searchKey: ''
     };
-
   }
   render(){
     const { pageX, pageY, modelShow, selectAnimate, selected, searchKey } = this.state;
-    const { goBack, searchSelected, searchKeyChange} = this.props;
-
+    const { goBack, searchSelected, searchKeyChange, addHistory, historyVisableChange} = this.props;
 
     return (
       <View style={styles.header}>
@@ -97,14 +97,19 @@ class SearchHeader extends React.Component{
             </View>
           </TouchableOpacity>
 
-          <TextInput 
+          <TextInput
+            ref={(input)=>this.input = input}
+            autoFocus={true}
             underlineColorAndroid="transparent" 
             placeholder="请输入搜索内容" 
             style={styles.searchInput}
             value={searchKey}
             onChangeText={(sk)=> this.searchKeyChange.call(this,sk)}
-            onSubmitEditing={()=> searchKeyChange(searchKey)}
-
+            onSubmitEditing={()=> {
+              searchKeyChange(searchKey);
+              addHistory(searchKey);
+              historyVisableChange(false);
+            }}
             returnKeyType="search"
             returnKeyLabel="search"
           />
@@ -199,8 +204,16 @@ class SearchHeader extends React.Component{
   }
   searchKeyChange(text){
     // console.log(text);
+    const { historyVisableChange } = this.props;
     this.setState({
       searchKey: text
+    },()=>{
+      historyVisableChange(true);
+
+      const isFocus = this.input.isFocused();
+      if(!isFocus){
+        this.input.focus();
+      }
     });
   }
   selectModalChange(isOpen){
@@ -241,9 +254,21 @@ class SearchHeader extends React.Component{
 
       }
     })
+
     // console.log(( _g.os === 'android' ? _g.appOft : 0 ),_g.appOft)
     
   }
+  componentWillReceiveProps(nextProps){
+    const { searchKey } = this.state;
+    if(nextProps.searchKey !== searchKey){
+      this.setState({
+        searchKey: nextProps.searchKey
+      },()=>{
+        this.input.focus();
+      })
+    }
+  }
+
   selectChange(idx){
     const { searchSelectChange } = this.props;
     this.selectModalChange(false)

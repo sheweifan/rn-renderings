@@ -14,15 +14,17 @@ const {width, height} = Dimensions.get('window');
 
 @connect(
   (({search})=>{
+    const {searchHistory, searchHistoryVisable} = search;
     return {
-      searchHistory: search.searchHistory
+      searchHistory: searchHistory,
+      searchHistoryVisable: searchHistoryVisable
     }
   }),
   (dispatch)=>{
     return {
+      keyChange: (text)=> dispatch(actions.searchKeyChange(text)),
       clearHistory: ()=> dispatch(actions.searchHistoryClean()),
       initHistory: ()=> dispatch(actions.searchHistoryInit()),
-      addHistory: (item)=> dispatch(actions.searchHistoryAdd(item))
     }
   }
 )
@@ -31,8 +33,8 @@ class SearchHistory extends React.Component{
     super(props);
   }
   render(){
-    const {searchHistory,clearHistory, addHistory} = this.props;
-    if(searchHistory.length === 0){
+    const {searchHistory,clearHistory, addHistory, keyChange, searchHistoryVisable} = this.props;
+    if(searchHistory.length === 0 || !searchHistoryVisable){
       return null;
     }
     return (
@@ -53,7 +55,7 @@ class SearchHistory extends React.Component{
                 key={index} 
                 style={[styles.searchBtn,styles.SearchHistoryItem]}
                 onPress={()=>{
-                  addHistory('fuck2')
+                  keyChange(item)
                 }}
               >
                 <Text style={[styles.searchBtnText]}>{item}</Text>

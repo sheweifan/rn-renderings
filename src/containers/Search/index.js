@@ -2,12 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { connect } from "react-redux";
 const {width, height} = Dimensions.get('window');
 
 import SearchHeader from './SearchHeader'
 import SearchHistory from './SearchHistory'
 
-
+@connect(
+  ({search}) => {
+    const { searchKey, searchSelected, searchHistoryVisable } = search;
+    return {
+      searchKey, 
+      searchSelected,
+      searchHistoryVisable
+    }
+  }
+)
 class Search extends React.Component{
   static navigationOptions = {
     // headerTitle: <HeaderSearch /> ,
@@ -24,15 +34,19 @@ class Search extends React.Component{
     super(props);
   }
   render(){
-    const { navigation } = this.props;
+    const { searchKey, searchSelected, searchHistoryVisable } = this.props;
     return (
       <View style={styles.searchOuter}>
         <SearchHeader/>
         <SearchHistory />
         {
-          // <Text>
-          //   SEARCH
-          // </Text>
+
+          searchHistoryVisable
+          ? null
+          : (<Text>
+            searchKey : { searchKey }
+            searchSelected : { searchSelected }
+          </Text>)
         }
       </View>
     )
