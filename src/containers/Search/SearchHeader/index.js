@@ -109,6 +109,7 @@ class SearchHeader extends React.Component{
               searchKeyChange(searchKey);
               addHistory(searchKey);
               historyVisableChange(false);
+              this.input.blur();
             }}
             returnKeyType="search"
             returnKeyLabel="search"
@@ -270,10 +271,12 @@ class SearchHeader extends React.Component{
   }
 
   selectChange(idx){
-    const { searchSelectChange } = this.props;
+    const { searchSelectChange, historyVisableChange } = this.props;
     this.selectModalChange(false)
       .then(()=>{
-        searchSelectChange(idx)
+        searchSelectChange(idx);
+        historyVisableChange(true);
+        this.input.focus();
         // this.setState({
         //   selected: idx
         // })
