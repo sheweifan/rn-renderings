@@ -4,13 +4,15 @@ import Storage from '../../utils/storage';
 const {
   SEARCH_SELECT_CHANGE,
   SEARCH_KEY_CHANGE,
-  SEARCH_HISTORY_UPDATE
+  SEARCH_HISTORY_UPDATE,
+  SEARCH_HISTORY_VISABLE_CHANGE
 } = types;
 
 const initState = {
   searchKey: '',
   searchSelected: 0,
-  searchHistory: []
+  searchHistory: [],
+  searchHistoryVisable: true
 };
 
 
@@ -22,8 +24,9 @@ export default search = (state=initState, action) => {
       return Object.assign({},state,{ searchKey: action.text })
     case SEARCH_HISTORY_UPDATE:
       return Object.assign({},state,{ searchHistory: action.data} )
+    case SEARCH_HISTORY_VISABLE_CHANGE:
+      return Object.assign({},state,{ searchHistoryVisable: action.visable} )
     default: 
       return state
   }
-
 }
