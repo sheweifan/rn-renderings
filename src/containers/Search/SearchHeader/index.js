@@ -44,7 +44,7 @@ const selectData = [
   },
   (dispatch)=>{
     return {
-      goBack: ()=>dispatch(NavigationActions.goBack()),
+      goBack: ()=>dispatch(NavigationActions.back()),
       searchKeyChange: (text)=> dispatch(actions.searchKeyChange(text)),
       searchSelectChange: (selected)=> dispatch(actions.searchSelectChange(selected)),
       addHistory: (item)=> dispatch(actions.searchHistoryAdd(item)),
