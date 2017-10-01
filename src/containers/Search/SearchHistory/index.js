@@ -17,7 +17,6 @@ const {width, height} = Dimensions.get('window');
     const {searchHistory, searchHistoryVisable} = search;
     return {
       searchHistory: searchHistory,
-      searchHistoryVisable: searchHistoryVisable
     }
   }),
   (dispatch)=>{
@@ -33,8 +32,8 @@ class SearchHistory extends React.Component{
     super(props);
   }
   render(){
-    const {searchHistory,clearHistory, addHistory, keyChange, searchHistoryVisable} = this.props;
-    if(searchHistory.length === 0 || !searchHistoryVisable){
+    const {searchHistory,clearHistory, addHistory, keyChange} = this.props;
+    if(searchHistory.length === 0 ){
       return null;
     }
     return (

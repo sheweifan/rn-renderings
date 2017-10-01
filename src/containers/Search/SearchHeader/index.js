@@ -278,7 +278,7 @@ class SearchHeader extends React.Component{
         searchSelectChange(idx);
         historyVisableChange(true);
         
-        // this.inputFocus();
+        this.inputFocus();
       })
   }
 
