@@ -261,13 +261,14 @@ class SearchHeader extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     const { searchKey } = this.state;
-    // if(nextProps.searchKey !== searchKey){
+    // console.log('get new props', nextProps);
+    if(nextProps.searchKey !== searchKey){
       this.setState({
         searchKey: nextProps.searchKey
       },()=>{
-        this.input.focus();
+        this.inputFocus();
       })
-    // }
+    }
   }
 
   selectChange(idx){
@@ -277,7 +278,7 @@ class SearchHeader extends React.Component{
         searchSelectChange(idx);
         historyVisableChange(true);
         
-        this.inputFocus();
+        // this.inputFocus();
       })
   }
 
