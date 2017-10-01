@@ -5,33 +5,15 @@ const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 import shadowImg from '../../static/images/itembg.png';
 
-const Img = props => {
+const Img = ({ImageUrl, TitleName, Id, index}) => {
   return (
-    <View>
-      <View style={styles.list}>
-        <TouchableHighlight>
-          <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/300x480/736e6b'}} />
-            <Image style={styles.itemShadow} source={shadowImg} />
-            <Text style={styles.itemTitle} numberOfLines={2}>现代简约清新效新效果图现代简约清新效新效果图</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/300x480/736e6b'}} />
-            <Image style={styles.itemShadow} source={shadowImg} />
-            <Text style={styles.itemTitle} numberOfLines={2}>现代简约清新简约清新效新效果图</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri:'https://dummyimage.com/300x480/736e6b'}} />
-            <Image style={styles.itemShadow} source={shadowImg} />
-            <Text style={styles.itemTitle} numberOfLines={2}>现代简新效新图</Text>
-          </View>
-        </TouchableHighlight>
+    <TouchableHighlight>
+      <View style={styles.item}>
+        <Image style={styles.itemImg} source={{uri: ImageUrl}} />
+        <Image style={styles.itemShadow} source={shadowImg} />
+        <Text style={styles.itemTitle} numberOfLines={2}>{TitleName}</Text>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 
@@ -42,9 +24,6 @@ const itemH = itemW*450/320;
 
 const styles = StyleSheet.create({
   list:{
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     paddingLeft: padding,
     paddingRight: padding,
   },
@@ -53,6 +32,7 @@ const styles = StyleSheet.create({
     height:itemH,
     margin: padding,
     position: 'relative',
+    display: 'flex',
   },
   itemImg: {
     flex: 1,

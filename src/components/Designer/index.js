@@ -4,32 +4,34 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const {width, height} = Dimensions.get('window');
 
-class Designer extends React.Component{
-  
-  constructor(props){
-    super(props);
-  }
- 
-  render(){
-    return (
-      <TouchableOpacity style={styles.designerItem}>
-        <View style={styles.designerItemInner}>
-          <Image style={styles.designerItemImg} source={{uri:'https://dummyimage.com/700x490/736e6b'}} />
-          <View style={styles.designerItemPresonMes}>
-            <Text numberOfLines={1} style={styles.designerItemName}>司法斗士</Text>
-            <View style={styles.designerItemLevelAndAddress}>
-              <Text style={[styles.designerItemInfo,styles.designerItemLevel]}>首席设计师</Text>
-              <Text style={styles.designerItemInfo}>广州市·天河区</Text>
-            </View>
-          </View>
-          <View style={styles.designerItemOtherMes}>
-            <Text style={styles.designerItemInfo}>作品 123</Text>
-            <Text style={styles.designerItemInfo}>签单数 10</Text>
+const Designer = (props)=>{
+  const { 
+    CityName,
+    AreaName,
+    GoodStyle,
+    ImageCount,
+    DesignerSignNumber,
+    NickName,
+    FaceImage
+  }= props;
+  return (
+    <TouchableOpacity style={styles.designerItem}>
+      <View style={styles.designerItemInner}>
+        <Image style={styles.designerItemImg} source={{uri:FaceImage}} />
+        <View style={styles.designerItemPresonMes}>
+          <Text numberOfLines={1} style={styles.designerItemName}>{NickName}</Text>
+          <View style={styles.designerItemLevelAndAddress}>
+            <Text style={[styles.designerItemInfo,styles.designerItemLevel]}>{GoodStyle}</Text>
+            <Text style={styles.designerItemInfo}>{CityName}·{AreaName}</Text>
           </View>
         </View>
-      </TouchableOpacity>
-    )
-  }
+        <View style={styles.designerItemOtherMes}>
+          <Text style={styles.designerItemInfo}>作品 {ImageCount}</Text>
+          <Text style={styles.designerItemInfo}>签单数 {DesignerSignNumber}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )
 }
 
 const btnH = 55;
@@ -82,12 +84,6 @@ const styles = StyleSheet.create({
     paddingLeft: padding
   }
 
-})
-
+});
 
 export default Designer;
-
-
-// export default StackNavigator({
-//   Home: { screen: Index },
-// });
