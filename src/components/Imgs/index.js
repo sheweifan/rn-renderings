@@ -1,34 +1,34 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
-import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 import shadowImg from '../../static/images/itembg.png';
+
 const Imgs = props => {
   const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName, go } = props;
   return (
-    <View>
-      <TouchableHighlight
-        onPress={()=>{go({routeName: 'ImageView',})}}
-      >
-        <View style={styles.item}>
-            <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
-            <View style={styles.itemBottom}>
-              <View style={styles.itemStyleCount}>
-                <Text style={[styles.itemText,styles.itemCount]}>{ ImgCount }图</Text>
-                <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
-                <Text style={[styles.itemText,styles.itemStyle]}>{ StyleName }</Text>
-              </View>
-            </View>
-            <Image style={styles.itemTitle} source={shadowImg}>
-              <Text style={styles.itemTitleInfo} numberOfLines={1}>{ TitleName }</Text>
-            </Image>
-            <Image style={styles.itemAvatar} source={{uri: FaceImage}}/>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={()=>{go({routeName: 'ImageView',})}}
+    >
+      <View>
+        <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
+        <View style={styles.itemBottom}>
+          <View style={styles.itemStyleCount}>
+            <Text style={[styles.itemText,styles.itemCount]}>{ ImgCount }图</Text>
+            <Icon name="md-images" size={20} color='#333' style={styles.countIcon}/>
+            <Text style={[styles.itemText,styles.itemStyle]}>{ StyleName }</Text>
+          </View>
         </View>
-      </TouchableHighlight>
+        <Image style={styles.itemTitle} source={shadowImg}>
+          <Text style={styles.itemTitleInfo} numberOfLines={1}>{ TitleName }</Text>
+        </Image>
+        <Image style={styles.itemAvatar} source={{uri: FaceImage}}/>
     </View>
+    </TouchableOpacity>
   );
 };
 
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     height: 42,
     display: 'flex',
     justifyContent: 'center',
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
+    backgroundColor: 'transparent'
   },
   itemTitleInfo: {
     color: '#fff',
