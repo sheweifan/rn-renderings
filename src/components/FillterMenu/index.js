@@ -26,7 +26,7 @@ class FillterMenu extends React.Component{
     //   return null
     // }
 
-    const { style,data } = this.props;
+    const { style,data,selected=0, selectChange } = this.props;
     return (
       <View style={[
           styles.fillterMenu,
@@ -60,14 +60,18 @@ class FillterMenu extends React.Component{
                 (item,i)=>{
                   return (
                     <View style={styles.fillterMenuItem} key={i}>
-                      <TouchableOpacity style={[
+                      <TouchableOpacity 
+                        onPress={
+                          ()=> selectChange(i)
+                        }
+                        style={[
                           styles.fillterMenuItemInner,
-                          (i===1?styles.fillterMenuItemInnerActive:{})
+                          (i===selected?styles.fillterMenuItemInnerActive:{})
                         ]}
                       >
                         <Text style={[
                             styles.fillterMenuItemText,
-                            (i===1?styles.fillterMenuItemTextActive:{})
+                            (i===selected?styles.fillterMenuItemTextActive:{})
                           ]}
                         >
                           {item}

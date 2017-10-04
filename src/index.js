@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BackHandler } from 'react-native';
 import Router, {navReducer} from './router'
 import getStore from './store';
 

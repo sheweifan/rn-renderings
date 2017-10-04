@@ -57,11 +57,11 @@ const MainScreenNavigator = TabNavigator(
 });
 
 const Routes = StackNavigator({
+  DesignerList: { screen: DesignerList },
   Home: { screen: MainScreenNavigator },
   Search: { screen: Search },
   ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
-  DesignerList: { screen: DesignerList },
   FreeDisign: { screen: FreeDisign },
   MapList: { screen: MapList },
   // Detail: { screen: Detail },

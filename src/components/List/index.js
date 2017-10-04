@@ -93,6 +93,16 @@ class List extends React.Component {
     this.pageIndex = pageIndex+ 1;
     this.loadData.bind(this)(this.pageIndex);
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      data: [],
+      loading: true,
+      refreshing: false
+    },()=>{
+      this.loadData.bind(this)(1);
+    })
+    
+  }
 }
 // const bannerH = width*250/750;
 const styles = StyleSheet.create({

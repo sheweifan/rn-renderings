@@ -1,5 +1,6 @@
 import React from 'react';
 import AppNavigator  from './router';
+import { BackHandler } from 'react-native';
 import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Toast } from 'antd-mobile';

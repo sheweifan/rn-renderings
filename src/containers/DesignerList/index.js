@@ -3,10 +3,18 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import FillterBar from '../../components/FillterBar';
-import Designer from '../../components/Designer';
 import CityPicker from '../../components/CityPicker';
 import FillterMenu from '../../components/FillterMenu';
+
+
+import List from '../../components/List';
+import Designer from '../../components/Designer';
+
+
 const {width, height} = Dimensions.get('window');
+
+import types from '../../config/fillterTypes';
+import { GetSolrDesigner_get } from '../../api/api'
 
 const PickerChild = (props)=>(
   <TouchableOpacity onPress={props.onChange}>
@@ -26,7 +34,12 @@ const items = [
     id: 3,
     text: '风格',
   },
-]
+];
+const orderData = [
+  '签单数',
+  '作品数',
+];
+const styleData = types.style.map(item=> item.OriginalName);
 class DesignerList extends React.Component{
   static navigationOptions = {
     title: '设计师',
@@ -36,14 +49,13 @@ class DesignerList extends React.Component{
     this.state={
       fillterActive: null,
       cityPickerVisible: false,
-      cityPickerValue: [0,0],
+      cityPickerValue: null,
       filterBarItems: items,
-      fillterMenuData: [
-        '签单数',
-        '作品数',
-      ],
+      fillterMenuData: [],
+      fillterMenuSelected: 0,
       fillterMenuHidden: true
     }
+    this.fillterMenuSelected=[0,0];
   }
  
   render(){
@@ -52,6 +64,7 @@ class DesignerList extends React.Component{
       cityPickerValue, 
       filterBarItems, 
       fillterMenuData, 
+      fillterMenuSelected,
       fillterMenuHidden } = this.state;
     return (
       <View style={styles.detailContainer}>
@@ -60,11 +73,6 @@ class DesignerList extends React.Component{
           items={filterBarItems}
           onChange={ this.fillterBarChange.bind(this) }
         />
-        <ScrollView
-        >
-          <Designer />
-          <Designer />
-        </ScrollView>
 
         <CityPicker 
           visible={cityPickerVisible} 
@@ -76,13 +84,40 @@ class DesignerList extends React.Component{
         >
           <View></View>
         </CityPicker>
+        {
+          cityPickerValue
+          ? <List 
+            api={GetSolrDesigner_get}
+            renderItem={({item,index})=><Designer key={index} {...item}/>}
+            params={{
+              order: cityPickerValue[1],
+              style: cityPickerValue[1],
+              city: cityPickerValue[1],
+            }}
+          />
+          : null
+        }
 
         <FillterMenu
           data={fillterMenuData}
           hidden={fillterMenuHidden}
+          selected={ fillterMenuSelected }
+          selectChange={ this.selectChange.bind(this)}
         />
+        
       </View>
     )
+  }
+  selectChange(i){
+    let {filterBarItems, fillterMenuData} = this.state;
+    filterBarItems[this.selecting+1].text = fillterMenuData[i];
+    this.fillterMenuSelected[this.selecting] = i;
+    this.setState({
+      fillterMenuSelected: i,
+      fillterMenuHidden: true,
+      fillterActive: null,
+      filterBarItems
+    })
   }
   fillterBarChange(i){
     // console.log(i,this.state)
@@ -90,10 +125,13 @@ class DesignerList extends React.Component{
     if(i!==0){
       fillterMenuHidden = (i == null)
     }
+    this.selecting = i-1;
     this.setState({
       fillterActive: i,
       cityPickerVisible: i===0 ,
-      fillterMenuHidden
+      fillterMenuData: i===1? orderData : styleData,
+      fillterMenuHidden,
+      fillterMenuSelected: this.fillterMenuSelected[i-1],
     })
     // setTimeout(()=>{
     //   this.setState({
