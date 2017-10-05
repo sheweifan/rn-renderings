@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView,TouchableOpacity,FlatList } from 'react-native';
 
 import LoadingState from '../LoadingState';
@@ -94,6 +95,8 @@ class List extends React.Component {
     this.loadData.bind(this)(this.pageIndex);
   }
   componentWillReceiveProps(nextProps){
+    console.log(_.isEqual(this.props.params, nextProps.params));
+    if(_.isEqual(this.props.params, nextProps.params)) return;
     this.setState({
       data: [],
       loading: true,
