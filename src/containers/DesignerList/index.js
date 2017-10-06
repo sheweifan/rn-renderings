@@ -90,8 +90,8 @@ class DesignerList extends React.Component{
             api={GetSolrDesigner_get}
             renderItem={({item,index})=><Designer key={index} {...item}/>}
             params={{
-              order: cityPickerValue[1],
-              style: cityPickerValue[1],
+              order: this.fillterMenuSelected[0],
+              style: this.fillterMenuSelected[1],
               city: cityPickerValue[1],
             }}
           />
