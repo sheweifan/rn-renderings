@@ -26,11 +26,7 @@ export const locationInit = ()=>{
       // console.log('location err', e)
       dispatch({
         type: types.LOCATION_CHANGE,
-        data: {
-          cityId: null,
-          cityName: null,
-          cityPath: null
-        }
+        data: null
       })
     }
     
