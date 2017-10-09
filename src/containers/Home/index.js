@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView,TouchableOpacity,FlatList } from 'react-native';
 
 import List from '../../components/List';
@@ -7,23 +7,15 @@ import Imgs from '../../components/Imgs';
 import HomeTop from './HomeTop';
 
 import actions from '../../actions';
-// import Detail from '../../containers/Detail';
-// import LinearGradient from 'react-native-linear-gradient';
-// import LinearGradient from 'react-native-linear-gradient'; 
-//  http://ionicframework.com/docs/ionicons/
 const {height, width} = Dimensions.get('window');
 
 import { TXgt_get } from '../../api/api'
-
 
 import icon_index from '../../static/images/nav/icon_index.png'
 import icon_index_active from '../../static/images/nav/icon_index_active.png'
 
 @connect(
-  (state)=>{
-    // console.log('redux state', state)
-    return {}
-  },
+  (state)=>({}),
   (dispatch)=>{
     return {
       locationInit: ()=> dispatch(actions.locationInit())
@@ -68,7 +60,6 @@ class Index extends React.Component {
     this.props.locationInit();
   }
 }
-// const bannerH = width*250/750;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff'

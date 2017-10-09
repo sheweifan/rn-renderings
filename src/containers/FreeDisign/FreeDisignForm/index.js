@@ -36,16 +36,6 @@ const CityChose = ({extra='请选择城市',onClick})=> {
           extra
         }
       </Text>
-      {
-        // <TextInput 
-        //   style={styles.formItemText}
-        //   placeholderTextColor={'#666'} 
-        //   editable={false} 
-        //   placeholder={}
-        //   underlineColorAndroid="transparent"
-        //   value={props.extra}
-        // />
-      }
       <Icon name="ios-arrow-forward" size={16} color={'#999'} style={styles.selectItemIcon}/>
     </TouchableOpacity>
   )
@@ -166,33 +156,17 @@ class FreeDisignForm extends React.Component {
       </View>
     );
   }
-  // textChange(type,e){
-  //   console.log(e);
-  //   this.setState({
-  //     [type]:e
-  //   })
-  // }
   
   phonenumVerify(){
     const {phonenum} = this.state;
 
     const phonenumError = !/^0?1[3|4|5|7|8][0-9]\d{8}$/.test(phonenum);
-    // console.log(verified);
     this.setState({
       phonenumError
     })
 
     return phonenumError;
   }
-
-  // codeInterval(){
-  //   const fn = ()=>{
-  //     this.codeTime = (this.codeTime || 60) - 1;
-
-  //   }
-
-
-  // }
 
   setCode(){
 
@@ -301,12 +275,7 @@ class FreeDisignForm extends React.Component {
           )
         }
 
-      // console.log(data,opts);
      })
-    // console.log('verified',CitySelected,verifyCode,phonenum)
-    // console.log(this.CitySelected);
-    // if()
-
   }
 }
 
