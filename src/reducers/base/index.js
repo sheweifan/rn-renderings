@@ -5,15 +5,15 @@ const {
 
 
 const initState = {
-	cityId: null,
-	cityName: null,
-	cityPath: null
+  location: null
 };
 
 export default location = (state=initState, action) => {
   switch(action.type){
     case LOCATION_CHANGE:
-      return action.data
+      return Object.assign({},state,{
+        location: action.data
+      })
     default: 
       return state
   }
