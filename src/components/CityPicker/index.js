@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { Picker } from 'antd-mobile';
 import {GetCityMes_get} from '../../api/api/my';
@@ -7,6 +8,15 @@ import {GetCityMes_get} from '../../api/api/my';
 import {GetProvinceAndCity_get} from '../../api/api'
 
 import  getLocation  from '../../utils/location';
+
+@connect(
+  ({base})=>{
+    const {location} = base;
+    return {
+      location
+    }
+  }
+)
 class CityPicker extends React.Component {
 
   constructor(props){
@@ -18,7 +28,7 @@ class CityPicker extends React.Component {
   }
 
   render(){
-    const {children, onChange} = this.props;
+    const {children, onChange } = this.props;
     const {cityData, sValue} = this.state;
     // console.log('render',cityData)
     if(cityData == null){
@@ -58,9 +68,10 @@ class CityPicker extends React.Component {
   }
 
   async componentDidMount(){
-    const { nation } = this.props;
+    const { location, nation } = this.props;
+    console.log(location)
+    
     let cityData = null;
-    let cityMes = null;
     try{
       const {Data} = await GetProvinceAndCity_get()
       cityData = Data;
@@ -69,25 +80,10 @@ class CityPicker extends React.Component {
       console.log(e);
     }
 
-    try{
-      const {coords} = await getLocation();
-      const { latitude,longitude } = coords;
-
-      const opts = {
-        location:`${latitude}:${longitude}`
-      };
-
-      cityMes = await GetCityMes_get(opts);
-    }catch(e){
-      console.log(e);
-    }
-
 
     if(cityData){
-      const _cityMes = cityMes || { results:[{name:'',path:',,,'}] }
       // const name = _cityMes.results[0].name;
-      const path = _cityMes.results[0].path.split(',');
-      const name = path[1];
+      const name = location == null ? null : location.cityPath[1];
       const value = [];
       const parseData = cityData.map(
         ({Code,Name,City})=>{
@@ -96,7 +92,7 @@ class CityPicker extends React.Component {
             "label": Name,
             "children": City.map(
               (citem)=>{
-                if(name.match(citem.Name)){
+                if( name != null && name.match(citem.Name) ){
                   value = [Code,citem.Code];
                 }
                 return {
