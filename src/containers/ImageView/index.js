@@ -1,36 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { Carousel, Toast } from 'antd-mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import { RealImg_get, ImgBaseInfo_get } from '../../api/api';
+import LoadingState from '../../components/LoadingState';
+
+
 const {width, height} = Dimensions.get('window');
-
-const imglist = [
-  {
-    imgId: 1,
-    imgUrl: 'http://dummyimage.com/600x700/ee735c'
-  },
-  {
-    imgId: 2,
-    imgUrl: 'https://dummyimage.com/500x999/ffffe7/000.png&text=test+image+2'
-  },
-  {
-    imgId: 3,
-    imgUrl: 'https://dummyimage.com/600x400/000fe7/ffffff.png&text=test+image+3'
-  },
-]
-
 
 class ImageView extends React.Component{
   static navigationOptions = {
-    title: 'ImageView',
     header: null
   }
   constructor(props){
     super(props);
+    // 页面传值
+    this.params = props.params || {
+      id: 540000198704095400,
+      type: 'img',
+    }
+
     this.state={
-      selectedIndex: 0
+      selectedIndex: 0,
+      data: null
     }
   }
   afterChange(current){
@@ -40,34 +33,51 @@ class ImageView extends React.Component{
   }
   render(){
     const { navigation } = this.props;
-    const { selectedIndex } = this.state;
+    const { selectedIndex, data } = this.state;
     return (
-      <View Style={styles.detailContainer}>
-        <Carousel 
-          style={styles.swiper} 
-          dots={false} 
-          selectedIndex={selectedIndex}
-          afterChange={this.afterChange.bind(this)}
-        >
-          {
-            imglist.map(
-              (item)=>(
-                <Image style={styles.swiperImg} source={{uri: item.imgUrl}} key={item.imgId} />
-              )
-            )
-          }
-        </Carousel>
-        <View style={styles.design}>
-          <View style={styles.designInner}>
-            <Image style={styles.designAvatar} source={{uri: 'https://dummyimage.com/140x140/f700ff/000.png&text=avatar'}}/>
-            <Text style={styles.imgDesc}>
-              现代简约客厅电视背景墙激情装修效修效果图现代简约客厅电视
-            </Text>
-            <Text style={styles.swiperProgress}>
-              {selectedIndex+1}/{imglist.length}
-            </Text>
-          </View>
-        </View>
+      <View style={styles.detailContainer}>
+        {
+          data == null
+          ? <View style={styles.loading}>
+              <LoadingState loading={true} />
+            </View>
+          : <View>
+              <Carousel 
+                style={styles.swiper} 
+                dots={false} 
+                selectedIndex={selectedIndex}
+                afterChange={this.afterChange.bind(this)}
+              >
+                {
+                  data.imglist.map(
+                    (item, i)=>(
+                      <Image style={styles.swiperImg} source={{uri: item.ImageUrl}} key={i} />
+                    )
+                  )
+                }
+              </Carousel>
+              <View style={styles.design}>
+                <View style={styles.designInner}>
+                  {
+                    data.DesignerInfo
+                    ? <Image style={styles.designAvatar} source={{uri: data.DesignerInfo.FaceImage}}/>
+                    : null
+                  }
+                  <Text style={styles.imgDesc}>
+                    { data.imglist[selectedIndex].TitleName }
+                  </Text>
+                  {
+                    data.imglist.length > 1
+                    ? <Text style={styles.swiperProgress}>
+                      {selectedIndex+1}/{data.imglist.length}
+                    </Text>
+                    : null
+                  }
+                  
+                </View>
+              </View>
+            </View> 
+        }
         {
           // <TouchableOpacity style={styles.fixedBtn}>
           //   <Text style={styles.fixedBtnText}>0元设计</Text>
@@ -82,12 +92,24 @@ class ImageView extends React.Component{
       </View>
     )
   }
+  async componentDidMount(){
+    const { id, type } = this.params;
+    const api = type === 'imgs'? ImgBaseInfo_get : RealImg_get;
+    const data = await api({ params:{ id } });
+
+    if( data.Success ){
+      this.setState({
+        data: data.Data
+      })
+    }
+  }
 }
 
 const btnH = 55;
 const styles = StyleSheet.create({
   detailContainer: {
     flex: 1,
+    backgroundColor: '#000'
   },
   goback: {
     position: 'absolute',
@@ -104,10 +126,14 @@ const styles = StyleSheet.create({
   gobackIcon: {
     backgroundColor: 'transparent'
   },
+  loading: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   swiper: {
     height: height,
-    backgroundColor: 'transparent',
-    backgroundColor: '#000'
   },
   swiperItem: {
     height: height,
@@ -155,7 +181,7 @@ const styles = StyleSheet.create({
   },
   imgDesc: {
     fontSize: 16,
-    flexShrink: 1,
+    flex: 1,
     color: '#fff',
     marginRight: 10,
     marginLeft: 10,
@@ -168,9 +194,3 @@ const styles = StyleSheet.create({
 
 
 export default ImageView;
-
-
-// export default StackNavigator({
-//   Home: { screen: Index },
-// });
-// 
