@@ -8,11 +8,19 @@ const {height, width} = Dimensions.get('window');
 import shadowImg from '../../static/images/itembg.png';
 
 const Imgs = props => {
-  const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName, go } = props;
+  const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName, navigate, EpId } = props;
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={()=>{go({routeName: 'ImageView',})}}
+      onPress={()=>{ 
+        navigate({
+          routeName: 'ImageView',
+          params: {
+            type: 'imgs',
+            id: EpId
+          }
+        })
+      }}
     >
       <View>
         <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
@@ -112,7 +120,7 @@ export default connect(
   },
   (dispatch)=>{
     return {
-      go: (path)=>dispatch(NavigationActions.navigate(path))
+      navigate: (path)=>dispatch(NavigationActions.navigate(path))
     }
   }
 )(Imgs);
