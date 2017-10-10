@@ -9,8 +9,6 @@ const LoadingState = props => {
   }else if(loading === false){
     text = '上拉加载更多'
   }
-
-
   return (
     <View style={styles.loading}>
       <Text style={styles.loadingText}>

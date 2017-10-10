@@ -6,8 +6,6 @@ import { Toast, ActivityIndicator, Modal } from 'antd-mobile';
 import {DesignQuotation_post} from '../../../api/api'
 const {height, width} = Dimensions.get('window');
 
-
-
 import CityPicker from '../../../components/CityPicker';
 
 // const FormInput = ({placeholder}) => (
