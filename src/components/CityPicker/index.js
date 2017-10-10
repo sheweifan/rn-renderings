@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { Picker } from 'antd-mobile';
-import {GetCityMes_get} from '../../api/api/my';
-// import { Constants, Location, Permissions } from 'expo';
-// import { Camera, Permissions } from 'expo';
-import {GetProvinceAndCity_get} from '../../api/api'
 
+import {GetCityMes_get} from '../../api/api/my';
+import {GetProvinceAndCity_get} from '../../api/api'
 import  getLocation  from '../../utils/location';
 
 @connect(
@@ -30,47 +27,34 @@ class CityPicker extends React.Component {
   render(){
     const {children, onChange } = this.props;
     const {cityData, sValue} = this.state;
-    // console.log('render',cityData)
     if(cityData == null){
       return React.cloneElement(children, {
-        //把父组件的props.name赋值给每个子组件
         extra: '正在获取城市'
       })
     }
-    // console.log('render')
 
     return (
-
-     <Picker 
+      <Picker 
         data={cityData}
         title="选择城市"
         cascade={true}
         extra="选择城市"
         cols={2}
-        format={(values)=>{
-          // console.log(values)
-          // 
-          return values.join('')
-        }}
         value={sValue}
         { ...this.props }
         onChange={v => {
-          // console.log(v);
           this.setState({ sValue: v })
-          // onChange && onChange(v);
         }}
       >
         {
           children
         }
-    </Picker>
+      </Picker>
     )
   }
 
   async componentDidMount(){
     const { location, nation } = this.props;
-    console.log(location)
-    
     let cityData = null;
     try{
       const {Data} = await GetProvinceAndCity_get()
@@ -82,8 +66,7 @@ class CityPicker extends React.Component {
 
 
     if(cityData){
-      // const name = _cityMes.results[0].name;
-      const name = location == null ? null : location.cityPath[1];
+      const cityName = location == null ? null : location.cityPath[1];
       const value = [];
       const parseData = cityData.map(
         ({Code,Name,City})=>{
@@ -92,7 +75,7 @@ class CityPicker extends React.Component {
             "label": Name,
             "children": City.map(
               (citem)=>{
-                if( name != null && name.match(citem.Name) ){
+                if( cityName != null && cityName.match(citem.Name) ){
                   value = [Code,citem.Code];
                 }
                 return {
@@ -156,20 +139,3 @@ class CityPicker extends React.Component {
 }
 
 export default CityPicker;
-
-
-
-// for( let i in cityData){
-//       if( i.value === sValue[0] ){
-//         console.log(i)
-//         sLabel[0] = i.value;
-          
-//           for(let j in i.children){
-//             if(j.value === sValue[1]){
-//               sLabel[1] = j.value;
-//             }
-//           }
-//       }
-//     }
-
-//     conosle.log(1111111,sLabel);
