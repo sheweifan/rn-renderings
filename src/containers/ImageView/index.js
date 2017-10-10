@@ -16,11 +16,10 @@ class ImageView extends React.Component{
   constructor(props){
     super(props);
     // 页面传值
-    this.params = props.params || {
+    this.params = props.navigation.state.params || {
       id: 540000198704095400,
       type: 'img',
     }
-
     this.state={
       selectedIndex: 0,
       data: null
