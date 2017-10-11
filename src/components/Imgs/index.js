@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const {height, width} = Dimensions.get('window');
