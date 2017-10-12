@@ -13,9 +13,9 @@ import icon_find_active from '../../static/images/nav/icon_find_active.png'
 
 const {height, width} = Dimensions.get('window');
 
-const FindItem = ({text,img})=>{
+const FindItem = ({text,img, onPress})=>{
   return (
-    <TouchableOpacity style={styles.findItem}>
+    <TouchableOpacity style={styles.findItem} onPress={onPress}>
       <Image style={styles.findItemImg} source={{uri:imgPrefix+img}}>
         <Text style={styles.findItemText}>
           {text}
@@ -55,8 +55,8 @@ class Find extends React.Component {
     },
     // header: null
   };
-  goMap(){
-    this.props.navigation.navigate('MapList')
+  goMap(opts){
+    this.props.navigation.navigate('MapList',opts)
   }
   render() {
     return (
@@ -68,8 +68,24 @@ class Find extends React.Component {
                 <View key={item.type}>
                     <FindTitle title={item.typeText}/>
                     <View style={styles.findList}>
-                      { item.child.map(cItem=> <FindItem {...cItem}  key={cItem.Id}/> ) }
-                      <TouchableOpacity style={[styles.findItem,styles.findItemMore]} onPress={this.goMap.bind(this)}>
+                      { 
+                        item.child.map(cItem=> <FindItem 
+                          {...cItem} 
+                          key={cItem.Id} 
+                          onPress={this.goMap.bind(this, {
+                            type: item.type,
+                            ...cItem
+                          })} 
+                        />)
+                      }
+                      <TouchableOpacity 
+                        style={[styles.findItem,styles.findItemMore]} 
+                        onPress={
+                          this.goMap.bind(this,{
+                            type: item.type
+                          })
+                        }
+                      >
                         <Text style={styles.findItemMoreCh}>更多{item.typeText}</Text>
                         <Text style={styles.findItemMoreEn}>More</Text>
                       </TouchableOpacity>
