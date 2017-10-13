@@ -75,6 +75,9 @@ class MapList extends React.Component {
   };
   constructor(props){
     super(props);
+    // console.log(props);
+    const params = props.navigation.state.params;
+    console.log(params)
     this.state= {
       tabActive: 0,
       fillterActive: null,
