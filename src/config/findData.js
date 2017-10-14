@@ -1,7 +1,7 @@
 
 const data = [
   {
-    type: 1,
+    type: 'style',
     typeText: '风格',
     child: [
       {Id: 1, text: '现代风格' , img: '1-1.jpg',info:"现代简约"},
@@ -15,7 +15,7 @@ const data = [
     ]
   },
   {
-    type: 2,
+    type: 'kind',
     typeText: '空间',
     child: [
       {Id: 1, text: '客厅'    ,img: '2-1.jpg',info:'客厅'},
@@ -26,7 +26,7 @@ const data = [
     ]
   },
   {
-    type: 3,
+    type: 'part',
     typeText: '局部',
     child: [
       {Id: 22, text: '玄关'  ,img: '3-1.jpg',info:'玄关'},
@@ -37,7 +37,7 @@ const data = [
     ]
   },
   {
-    type: 4,
+    type: 'type',
     typeText: '户型',
     child: [
       {Id: 1, text: '小户型', img: '4-1.jpg',info:'小户型'},
