@@ -489,5 +489,168 @@ export default ({
       "GroupId": 5,
       "GroupName": "感觉",
     }
+  ],
+  type: [
+      {
+          "Id": 43,
+          "Code": "xiaohuxing",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 1,
+          "OriginalName": "小户型",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "xiaohuxing/",
+          "CssText": ""
+      },
+      {
+          "Id": 44,
+          "Code": "sanju",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 2,
+          "OriginalName": "三居",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "sanju/",
+          "CssText": ""
+      },
+      {
+          "Id": 45,
+          "Code": "siju",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 3,
+          "OriginalName": "四居",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "siju/",
+          "CssText": ""
+      },
+      {
+          "Id": 46,
+          "Code": "yueju",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 4,
+          "OriginalName": "跃层",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "yueju/",
+          "CssText": ""
+      },
+      {
+          "Id": 48,
+          "Code": "bieshu",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 5,
+          "OriginalName": "别墅",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "bieshu/",
+          "CssText": ""
+      },
+      {
+          "Id": 74,
+          "Code": "gongyu",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 6,
+          "OriginalName": "公寓",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "gongyu/",
+          "CssText": ""
+      },
+      {
+          "Id": 75,
+          "Code": "erju",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 7,
+          "OriginalName": "二居室",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "erju/",
+          "CssText": ""
+      }
+  ],
+  m: [
+    {
+        "Id": 49,
+        "Code": "0m",
+        "OriginalColumn": "Mid",
+        "OriginalId": 1,
+        "OriginalName": "60平米以下",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            0,
+            60
+        ],
+        "XgtUrl": "0m/",
+        "CssText": ""
+    },
+    {
+        "Id": 50,
+        "Code": "60m",
+        "OriginalColumn": "Mid",
+        "OriginalId": 2,
+        "OriginalName": "60-80平米",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            60,
+            80
+        ],
+        "XgtUrl": "60m/",
+        "CssText": ""
+    },
+    {
+        "Id": 51,
+        "Code": "80m",
+        "OriginalColumn": "Mid",
+        "OriginalId": 3,
+        "OriginalName": "80-100平米",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            80,
+            100
+        ],
+        "XgtUrl": "80m/",
+        "CssText": ""
+    },
+    {
+        "Id": 52,
+        "Code": "100m",
+        "OriginalColumn": "Mid",
+        "OriginalId": 4,
+        "OriginalName": "100-120平米",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            100,
+            120
+        ],
+        "XgtUrl": "100m/",
+        "CssText": ""
+    },
+    {
+        "Id": 53,
+        "Code": "120m",
+        "OriginalColumn": "Mid",
+        "OriginalId": 5,
+        "OriginalName": "120平米以上",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            120,
+            500000
+        ],
+        "XgtUrl": "120m/",
+        "CssText": ""
+    }
   ]
 });
