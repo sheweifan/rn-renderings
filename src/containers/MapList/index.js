@@ -1,23 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import Img from '../../components/Img';
-// import Imgs from '../../components/Imgs';
+
 import Tab from '../../components/Tab';
 import FillterBar from '../../components/FillterBar';
 import FillterMenu from '../../components/FillterMenu';
-
-import icon_index from '../../static/images/nav/icon_index.png'
-import icon_index_active from '../../static/images/nav/icon_index_active.png'
-
 import _g from '../../config/global.js';
 
-// import Detail from '../../containers/Detail';
-// import LinearGradient from 'react-native-linear-gradient';
-// import LinearGradient from 'react-native-linear-gradient'; 
-//  http://ionicframework.com/docs/ionicons/
-const {height, width} = Dimensions.get('window');
+import fillterTypes from '../../config/fillterTypes';
 
+const {height, width} = Dimensions.get('window');
 const tabOpts ={
   items: [
     {
@@ -30,26 +22,52 @@ const tabOpts ={
     }
   ]
 };
-const FillterOpts= {
-  items: [
+const FillterOpts= [
+  [
     {
       id: 1,
       text: '风格',
+      type: 'style'
     },
     {
       id: 2,
       text: '户型',
+      type: 'type'
     },
     {
       id: 3,
       text: '面积',
+      type: 'm'
     },
     {
       id: 4,
       text: '感觉',
+      type: 'color'
+    },
+  ],
+  [
+    {
+      id: 1,
+      text: '风格',
+      type: 'style'
+    },
+    {
+      id: 5,
+      text: '空间',
+      type: 'kind'
+    },
+    {
+      id: 6,
+      text: '局部',
+      type: 'part'
+    },
+    {
+      id: 4,
+      text: '感觉',
+      type: 'color'
     },
   ]
-}
+];
 
 class MapList extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
@@ -81,16 +99,31 @@ class MapList extends React.Component {
     this.state= {
       tabActive: 0,
       fillterActive: null,
-      fillterMenuHidden: true
+      fillterMenuHidden: true,
+      fillterMenuSelected: [0,0,0,0],
     }
   }
   render() {
     const { navigate } = this.props.navigation;
-    const { tabActive,fillterActive,fillterMenuHidden } = this.state;
+    const { tabActive, fillterActive, fillterMenuHidden, fillterMenuSelected } = this.state;
+
+    const FillterBarBaseItems = FillterOpts[tabActive];
+    const nowTypeData = fillterActive == null ? [] : fillterTypes[ FillterBarBaseItems[fillterActive].type ];
+    const fillterMenuData = nowTypeData.map((item)=> item.OriginalName);
+
+    const FillterBarItems = FillterBarBaseItems.map((item,i)=> {
+      const _selected = fillterMenuSelected[i];
+      return _selected===0? item : {
+        text: fillterTypes[item.type][_selected].OriginalName,
+        id: fillterTypes[item.type][_selected].Id
+      }
+    })
+
     return (
       <View style={styles.container}>
         <FillterBar 
-          {...FillterOpts}
+          // {...FillterOpts}
+          items={ FillterBarItems }
           active={fillterActive}
           onChange={this.fillterChange.bind(this)}
         />
@@ -104,8 +137,17 @@ class MapList extends React.Component {
           </Text>
         </ScrollView>
         <FillterMenu
+          selected={fillterMenuSelected[fillterActive]}
+          selectChange={(i)=>{
+            fillterMenuSelected[fillterActive] = i;
+            this.setState({
+              fillterMenuSelected,
+              fillterActive: null,
+              fillterMenuHidden: true
+            })
+          }}
           hidden={fillterMenuHidden}
-          data={new Array(fillterActive*10 || 5).fill('啊啊啊')}
+          data={fillterMenuData}
         />
       </View>
       );
@@ -123,14 +165,14 @@ class MapList extends React.Component {
     if(tabActive !== this.state.tabActive){
       this.setState({
         tabActive,
+        fillterMenuSelected: new Array(4).fill(0),
+        fillterActive: null,
+        fillterMenuHidden: true
       });
       this.props.navigation.setParams({
         tabActive: tabActive
       })
     }
-    // if(tabActive !== this.state.tabActive){
-      
-    // }
 
   }
   componentDidMount(){
