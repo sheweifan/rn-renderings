@@ -64,8 +64,8 @@ class Find extends React.Component {
         <ScrollView>
           <View style={styles.findScrollContainer}>
             {
-              data.map(item=>(
-                <View key={item.type}>
+              data.map((item, index)=>(
+                <View key={index}>
                     <FindTitle title={item.typeText}/>
                     <View style={styles.findList}>
                       { 
