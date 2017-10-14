@@ -2,7 +2,7 @@ export default ({
   style: [
     {
       "Id": 0,
-      "Code": "jianyue",
+      "Code": "quanbu",
       "OriginalColumn": "StyleId",
       "OriginalId": 1,
       "OriginalName": "全部",
@@ -129,6 +129,15 @@ export default ({
   ],
   kind: [
     {
+      "Id": 0,
+      "Code": "quanbu",
+      "OriginalColumn": "KindId",
+      "OriginalId": 1,
+      "OriginalName": "全部",
+      "GroupId": 1,
+      "GroupName": "空间",
+    },
+    {
       "Id": 1,
       "Code": "keting",
       "OriginalColumn": "KindId",
@@ -211,6 +220,15 @@ export default ({
     }
   ],
   part: [
+    {
+      "Id": 1,
+      "Code": "quanbu",
+      "OriginalColumn": "PartId",
+      "OriginalId": 22,
+      "OriginalName": "全部",
+      "GroupId": 3,
+      "GroupName": "局部",
+    },
     {
       "Id": 21,
       "Code": "xuanguan",
@@ -424,6 +442,15 @@ export default ({
   ],
   color: [
     {
+      "Id": 1,
+      "Code": "quanbu",
+      "OriginalColumn": "ColorId",
+      "OriginalId": 8,
+      "OriginalName": "全部",
+      "GroupId": 5,
+      "GroupName": "感觉",
+    },
+    {
       "Id": 54,
       "Code": "hailan",
       "OriginalColumn": "ColorId",
@@ -491,6 +518,18 @@ export default ({
     }
   ],
   type: [
+      {
+          "Id": 1,
+          "Code": "quanbu",
+          "OriginalColumn": "TypeId",
+          "OriginalId": 1,
+          "OriginalName": "全部",
+          "GroupId": 4,
+          "GroupName": "户型",
+          "ParaIn": [],
+          "XgtUrl": "quanbu/",
+          "CssText": ""
+      },
       {
           "Id": 43,
           "Code": "xiaohuxing",
@@ -577,6 +616,21 @@ export default ({
       }
   ],
   m: [
+    {
+        "Id": 1,
+        "Code": "qiamni",
+        "OriginalColumn": "Mid",
+        "OriginalId": 1,
+        "OriginalName": "全部",
+        "GroupId": 4,
+        "GroupName": "户型",
+        "ParaIn": [
+            0,
+            60
+        ],
+        "XgtUrl": "0m/",
+        "CssText": ""
+    },
     {
         "Id": 49,
         "Code": "0m",
