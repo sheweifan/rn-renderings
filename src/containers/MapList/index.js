@@ -14,11 +14,11 @@ const tabOpts ={
   items: [
     {
       id:1,
-      text: '单图'
+      text: '套图'
     },
     {
       id:2,
-      text: '套图'
+      text: '单图'
     }
   ]
 };
@@ -95,12 +95,19 @@ class MapList extends React.Component {
     super(props);
     // console.log(props);
     const params = props.navigation.state.params;
-    console.log(params)
+    const tabActive = params.map === 'imgs'? 0: 1
+    let fillterMenuSelected = new Array(4).fill(0);
+    if(params.Id){
+      const type = params.type;
+      const selectIdx = fillterTypes[type].findIndex(item=> item.OriginalId === params.Id);
+      const barItemIdx = FillterOpts[tabActive].findIndex(item => item.type = type);
+      fillterMenuSelected[barItemIdx] = selectIdx;
+    }
     this.state= {
-      tabActive: 0,
+      tabActive,
+      fillterMenuSelected,
       fillterActive: null,
       fillterMenuHidden: true,
-      fillterMenuSelected: [0,0,0,0],
     }
   }
   render() {
@@ -131,8 +138,8 @@ class MapList extends React.Component {
           <Text>
             {
               tabActive === 1
-              ? '套图'
-              : '单图'
+              ? '单图'
+              : '套图'
             }
           </Text>
         </ScrollView>
