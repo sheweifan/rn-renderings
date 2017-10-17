@@ -57,13 +57,13 @@ const MainScreenNavigator = TabNavigator(
 });
 
 const Routes = StackNavigator({
+  MapList: { screen: MapList },
   Home: { screen: MainScreenNavigator },
   DesignerList: { screen: DesignerList },
   Search: { screen: Search },
   ImageView: { screen: ImageView },
   DesignerDetail: { screen: DesignerDetail },
   FreeDisign: { screen: FreeDisign },
-  MapList: { screen: MapList },
   // Detail: { screen: Detail },
 },{
   gesturesEnabled: false, // 是否允许右滑返回，在iOS上默认为true，在Android上默认为false
