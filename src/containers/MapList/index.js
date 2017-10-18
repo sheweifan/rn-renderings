@@ -3,10 +3,14 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollVie
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Tab from '../../components/Tab';
+import List from '../../components/List';
+import Img from '../../components/Img';
+import Imgs from '../../components/Imgs';
 import FillterBar from '../../components/FillterBar';
 import FillterMenu from '../../components/FillterMenu';
 import _g from '../../config/global.js';
 
+import { TXgt_get } from '../../api/api'
 import fillterTypes from '../../config/fillterTypes';
 
 const {height, width} = Dimensions.get('window');
@@ -94,7 +98,9 @@ class MapList extends React.Component {
   constructor(props){
     super(props);
     // console.log(props);
-    const params = props.navigation.state.params;
+    const params = props.navigation.state.params || {
+      map: 'imgs'
+    };
     const tabActive = params.map === 'imgs'? 0: 1
     let fillterMenuSelected = new Array(4).fill(0);
     if(params.Id){
@@ -128,21 +134,23 @@ class MapList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <FillterBar 
-          // {...FillterOpts}
-          items={ FillterBarItems }
-          active={fillterActive}
-          onChange={this.fillterChange.bind(this)}
-        />
-        <ScrollView>
-          <Text>
-            {
-              tabActive === 1
-              ? '单图'
-              : '套图'
-            }
-          </Text>
-        </ScrollView>
+        <List 
+          style={styles.container}
+          api={TXgt_get}
+          ListHeaderComponent={
+            <FillterBar 
+              // {...FillterOpts}
+              items={ FillterBarItems }
+              active={fillterActive}
+              onChange={this.fillterChange.bind(this)}
+            />
+          }
+          renderItem={({item,index})=>{
+            return <Imgs key={index} {...item}/>
+          }}
+          params={{order:1}}
+        >
+        </List>
         <FillterMenu
           selected={fillterMenuSelected[fillterActive]}
           selectChange={(i)=>{
@@ -160,15 +168,12 @@ class MapList extends React.Component {
       );
   }
   fillterChange(fillterActive){
-    // console.log('fillterActive',fillterActive)
     this.setState({
       fillterActive,
       fillterMenuHidden: fillterActive == null,
     })
   }
   tabChange(tabActive){
-    // console.log(tabActive);
-
     if(tabActive !== this.state.tabActive){
       this.setState({
         tabActive,
@@ -185,18 +190,8 @@ class MapList extends React.Component {
   componentDidMount(){
     this.props.navigation.setParams({
       tabChange: this.tabChange.bind(this),
-      tabActive: this.state.tabActive,
-      // headerStyle: {
-      //   display: 'none'
-      // }
+      tabActive: this.state.tabActive
     })
-  }
-  componentDidUpdate(prevProps,{tabActive}){
-    // if(tabActive !== this.state.tabActive){
-    //   this.props.navigation.setParams({
-    //     tabActive: this.state.tabActive
-    //   })
-    // }
   }
 }
 
