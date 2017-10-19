@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import _ from 'lodash';
 
 import Tab from '../../components/Tab';
 import List from '../../components/List';
@@ -119,7 +120,7 @@ class MapList extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { tabActive, fillterActive, fillterMenuHidden, fillterMenuSelected } = this.state;
-    console.log(222222, fillterMenuSelected)
+    console.log(222222, JSON.stringify(fillterMenuSelected))
     const FillterBarBaseItems = FillterOpts[tabActive];
     const nowTypeData = fillterActive == null ? [] : fillterTypes[ FillterBarBaseItems[fillterActive].type ];
     const fillterMenuData = nowTypeData.map((item)=> item.OriginalName);
@@ -154,14 +155,7 @@ class MapList extends React.Component {
         </List>
         <FillterMenu
           selected={fillterMenuSelected[fillterActive]}
-          selectChange={(i)=>{
-            fillterMenuSelected[fillterActive] = i;
-            this.setState({
-              fillterMenuSelected,
-              fillterActive: null,
-              fillterMenuHidden: true
-            })
-          }}
+          selectChange={this.fillterMenuSelectChange.bind(this)}
           hidden={fillterMenuHidden}
           data={fillterMenuData}
         />
@@ -174,6 +168,16 @@ class MapList extends React.Component {
       fillterMenuHidden: fillterActive == null,
     })
   }
+  fillterMenuSelectChange(idx){
+    const { fillterMenuSelected, fillterActive } = this.state;
+    var _fillterMenuSelected = _.clone(fillterMenuSelected);
+    _fillterMenuSelected[fillterActive] = idx;
+    this.setState({
+      fillterMenuSelected: _fillterMenuSelected,
+      fillterActive: null,
+      fillterMenuHidden: true
+    })
+    }
   tabChange(tabActive){
     if(tabActive !== this.state.tabActive){
       this.setState({
