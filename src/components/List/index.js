@@ -95,7 +95,7 @@ class List extends React.Component {
     this.loadData.bind(this)(this.pageIndex);
   }
   componentWillReceiveProps(nextProps){
-    console.log(11111,this.props.params, nextProps.params, _.isEqual(this.props.params, nextProps.params));
+    // console.log(11111,this.props.params, nextProps.params, _.isEqual(this.props.params, nextProps.params));
     if(_.isEqual(this.props.params, nextProps.params)) return;
     this.setState(initState,()=>{
       this.loadData.bind(this)(1);
