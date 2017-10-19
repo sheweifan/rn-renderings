@@ -23,6 +23,9 @@ class List extends React.Component {
     const { data, loading, refreshing } = this.state;
     const { navigate } = this.props.navigation || function() {} ;
     
+    if(data.length === 0){
+      return <LoadingState loading={loading}/>;
+    }
     return (
       <FlatList 
         data={data}
@@ -34,7 +37,7 @@ class List extends React.Component {
         {...this.props}
       >
       </FlatList>
-      );
+    );
   }
   loadData(idx){
     const { pageIndex, CountPage, state, props } = this;
