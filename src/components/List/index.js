@@ -9,15 +9,15 @@ import LoadingState from '../LoadingState';
 // import LinearGradient from 'react-native-linear-gradient'; 
 //  http://ionicframework.com/docs/ionicons/
 const {height, width} = Dimensions.get('window');
-
+const initState = {
+  data: [],
+  loading: true,
+  refreshing: false
+}
 class List extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      data: [],
-      loading: true,
-      refreshing: false
-    }
+    this.state = initState;
   }
   render() {
     const { data, loading, refreshing } = this.state;
@@ -95,13 +95,9 @@ class List extends React.Component {
     this.loadData.bind(this)(this.pageIndex);
   }
   componentWillReceiveProps(nextProps){
-    console.log(_.isEqual(this.props.params, nextProps.params));
+    console.log(11111,this.props.params, nextProps.params, _.isEqual(this.props.params, nextProps.params));
     if(_.isEqual(this.props.params, nextProps.params)) return;
-    this.setState({
-      data: [],
-      loading: true,
-      refreshing: false
-    },()=>{
+    this.setState(initState,()=>{
       this.loadData.bind(this)(1);
     })
     

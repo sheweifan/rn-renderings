@@ -10,7 +10,7 @@ import FillterBar from '../../components/FillterBar';
 import FillterMenu from '../../components/FillterMenu';
 import _g from '../../config/global.js';
 
-import { TXgt_get } from '../../api/api'
+import { TXgt_get, DXgt_get } from '../../api/api'
 import fillterTypes from '../../config/fillterTypes';
 
 const {height, width} = Dimensions.get('window');
@@ -119,7 +119,7 @@ class MapList extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { tabActive, fillterActive, fillterMenuHidden, fillterMenuSelected } = this.state;
-
+    console.log(222222, fillterMenuSelected)
     const FillterBarBaseItems = FillterOpts[tabActive];
     const nowTypeData = fillterActive == null ? [] : fillterTypes[ FillterBarBaseItems[fillterActive].type ];
     const fillterMenuData = nowTypeData.map((item)=> item.OriginalName);
@@ -134,21 +134,22 @@ class MapList extends React.Component {
 
     return (
       <View style={styles.container}>
+        <FillterBar 
+          items={ FillterBarItems }
+          active={fillterActive}
+          onChange={this.fillterChange.bind(this)}
+        />
+
         <List 
           style={styles.container}
-          api={TXgt_get}
-          ListHeaderComponent={
-            <FillterBar 
-              // {...FillterOpts}
-              items={ FillterBarItems }
-              active={fillterActive}
-              onChange={this.fillterChange.bind(this)}
-            />
-          }
+          api={tabActive === 0 ? TXgt_get : DXgt_get}
           renderItem={({item,index})=>{
-            return <Imgs key={index} {...item}/>
+            return tabActive === 0 ? <Imgs key={index} {...item}/> : <Img key={index} {...item}/> 
           }}
-          params={{order:1}}
+          params={{
+            type: tabActive === 0 ? 'imgs' : 'img',
+            selected: fillterMenuSelected,
+          }}
         >
         </List>
         <FillterMenu
