@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 const {width, height} = Dimensions.get('window');
 
 
