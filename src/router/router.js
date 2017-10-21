@@ -57,8 +57,8 @@ const MainScreenNavigator = TabNavigator(
 });
 
 const Routes = StackNavigator({
-  MapList: { screen: MapList },
   Home: { screen: MainScreenNavigator },
+  MapList: { screen: MapList },
   DesignerList: { screen: DesignerList },
   Search: { screen: Search },
   ImageView: { screen: ImageView },
