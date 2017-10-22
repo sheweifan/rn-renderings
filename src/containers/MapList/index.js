@@ -98,7 +98,6 @@ class MapList extends React.Component {
   };
   constructor(props){
     super(props);
-    // console.log(props);
     const params = props.navigation.state.params || {
       map: 'imgs'
     };
@@ -120,7 +119,6 @@ class MapList extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { tabActive, fillterActive, fillterMenuHidden, fillterMenuSelected } = this.state;
-    console.log(222222, JSON.stringify(fillterMenuSelected))
     const FillterBarBaseItems = FillterOpts[tabActive];
     const nowTypeData = fillterActive == null ? [] : fillterTypes[ FillterBarBaseItems[fillterActive].type ];
     const fillterMenuData = nowTypeData.map((item)=> item.OriginalName);
@@ -142,7 +140,7 @@ class MapList extends React.Component {
         />
 
         <List 
-          style={styles.container}
+          contentContainerStyle={styles.listContainer}
           api={tabActive === 0 ? TXgt_get : DXgt_get}
           renderItem={({item,index})=>{
             return tabActive === 0 ? <Imgs key={index} {...item}/> : <Img key={index} {...item}/> 
@@ -151,6 +149,13 @@ class MapList extends React.Component {
             type: tabActive === 0 ? 'imgs' : 'img',
             selected: fillterMenuSelected,
           }}
+          {...(tabActive ===1?
+            {columnWrapperStyle: {
+              paddingLeft: 6
+            },
+            numColumns:2
+            }:{})
+          }
         >
         </List>
         <FillterMenu
@@ -209,6 +214,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1
   },
+  listContainer: {
+    paddingTop: padding
+  }
 });
 
 export default MapList;
