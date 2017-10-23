@@ -24,7 +24,7 @@ class List extends React.Component {
     const { navigate } = this.props.navigation || function() {} ;
     
     if(data.length === 0){
-      return <LoadingState loading={loading}/>;
+      return <LoadingState loading={loading} style={{marginTop: 20}}/>;
     }
     return (
       <FlatList 
