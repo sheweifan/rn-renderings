@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, ScrollVie
 
 import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
+import LazyImage from '../../../components/LazyImage';
 
 const {height, width} = Dimensions.get('window');
 const HomeTop = ({navigate})=> (
   <View>
     <View style={styles.banner}>
-      <Image style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c/ffffff&text=Weifan-She'}}>
-      </Image>
+      <LazyImage style={styles.bannerImage} source={{uri:'http://dummyimage.com/600x700/ee735c/ffffff&text=Weifan-She'}} />
       <TouchableOpacity 
         activeOpacity={1}
         style={styles.search}
