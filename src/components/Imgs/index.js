@@ -7,6 +7,8 @@ const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
 import shadowImg from '../../static/images/itembg.png';
 
+import LazyImage from '../LazyImage';
+
 const Imgs = props => {
   const { CoverImageUrl, FaceImage, TitleName, ImgCount, StyleName, navigate, EpId } = props;
   return (
@@ -23,7 +25,7 @@ const Imgs = props => {
       }}
     >
       <View>
-        <Image style={styles.itemImg} source={{uri: CoverImageUrl}} />
+        <LazyImage style={styles.itemImg} source={{uri: CoverImageUrl}} />
         <View style={styles.itemBottom}>
           <View style={styles.itemStyleCount}>
             <Text style={[styles.itemText,styles.itemCount]}>{ ImgCount }图</Text>
