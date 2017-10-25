@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   itemImg: {
-    flex: 1,
+    // flex: 1,
+    width: itemW,
+    height:itemH,
   },
   itemShadow: {
     width: itemW,
