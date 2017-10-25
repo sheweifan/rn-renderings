@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight } from 'r
 import Icon from 'react-native-vector-icons/Ionicons';
 const {height, width} = Dimensions.get('window');
 // c8d2c2   736e6b   
+import LazyImage from '../LazyImage';
 import shadowImg from '../../static/images/itembg.png';
 
 const Img = ({ImageUrl, TitleName, Id, index, navigate}) => {
@@ -21,7 +22,7 @@ const Img = ({ImageUrl, TitleName, Id, index, navigate}) => {
       }}
     >
       <View style={styles.item}>
-        <Image style={styles.itemImg} source={{uri: ImageUrl}} />
+        <LazyImage style={styles.itemImg} source={{uri: ImageUrl}} />
         <Image style={styles.itemShadow} source={shadowImg} />
         <Text style={styles.itemTitle} numberOfLines={2}>{TitleName}</Text>
       </View>
