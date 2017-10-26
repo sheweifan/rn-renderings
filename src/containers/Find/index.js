@@ -84,6 +84,7 @@ class Find extends React.Component {
                         onPress={
                           this.goMap.bind(this,{
                             type: item.type,
+                            map: item.map,
                           })
                         }
                       >
