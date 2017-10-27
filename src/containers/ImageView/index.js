@@ -18,7 +18,7 @@ class ImageView extends React.Component{
     // 页面传值
     this.params = props.navigation.state.params || {
       id: 540000198704095400,
-      type: 'img',
+      type: 'imgs',
     }
     this.state={
       selectedIndex: 0,
@@ -35,11 +35,12 @@ class ImageView extends React.Component{
     const { selectedIndex, data } = this.state;
     return (
       <View style={styles.detailContainer}>
+        <View style={styles.loading}>
+          <LoadingState loading={true} />
+        </View>
         {
           data == null
-          ? <View style={styles.loading}>
-              <LoadingState loading={true} />
-            </View>
+          ? null
           : <View>
               <Carousel 
                 style={styles.swiper} 
@@ -129,14 +130,19 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width,
+    height
   },
   swiper: {
-    height: height,
+    height,
   },
   swiperItem: {
-    height: height,
-    width: width,
+    height,
+    width,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
